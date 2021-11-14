@@ -1,0 +1,175 @@
+[
+  {
+    "Input": "나는 크리스마스에 돌아갈 겁니다. ",
+    "NotSupportedByDesign": "javascript,python,java",
+    "Results": [
+      {
+        "Text": "크리스마스",
+        "Type": "date",
+        "Start": 3,
+        "Length": 5
+      }
+    ]
+  },
+  {
+    "Input": "나는 새해에 돌아갈 겁니다. ",
+    "NotSupportedByDesign": "javascript,python,java",
+    "Results": [
+      {
+        "Text": "새해",
+        "Type": "date",
+        "Start": 3,
+        "Length": 2
+      }
+    ]
+  },
+  {
+    "Input": "나는 추수감사절에 돌아갈 겁니다. ",
+    "NotSupportedByDesign": "javascript,python,java",
+    "Results": [
+      {
+        "Text": "추수감사절",
+        "Type": "date",
+        "Start": 3,
+        "Length": 5
+      }
+    ]
+  },
+  {
+    "Input": "나는 아버지의 날에 돌아갈 겁니다. ",
+    "NotSupportedByDesign": "javascript,python,java",
+    "Results": [
+      {
+        "Text": "아버지의 날",
+        "Type": "date",
+        "Start": 3,
+        "Length": 6
+      }
+    ]
+  },
+  {
+    "Input": "나는 2016년 새해에 돌아갈 겁니다.",
+    "NotSupportedByDesign": "javascript,python,java",
+    "Results": [
+      {
+        "Text": "2016년 새해",
+        "Type": "date",
+        "Start": 3,
+        "Length": 8
+      }
+    ]
+  },
+  {
+    "Input": "나는 클린 먼데이에 돌아갈 겁니다. ",
+    "NotSupportedByDesign": "javascript,python,java",
+    "Results": [
+      {
+        "Text": "클린 먼데이",
+        "Type": "date",
+        "Start": 3,
+        "Length": 6
+      }
+    ]
+  },
+  {
+    "Input": "마틴 루터 킹 데이는 미국 연방 휴일입니다. ",
+    "NotSupportedByDesign": "javascript,python,java",
+    "Results": [
+      {
+        "Text": "마틴 루터 킹 데이",
+        "Type": "date",
+        "Start": 0,
+        "Length": 10
+      }
+    ]
+  },
+  {
+    "Input": "마틴 루터 킹은 그의 이름을 딴 휴일이 있습니다. ",
+    "NotSupportedByDesign": "javascript,python,java",
+    "Results": []
+  },
+  {
+    "Input": "설날에는 떡국을 먹습니다. ",
+    "NotSupportedByDesign": "javascript,python,java",
+    "Results": [
+      {
+        "Text": "설날",
+        "Type": "date",
+        "Start": 0,
+        "Length": 2
+      }
+    ]
+  },
+  {
+    "Input": "삼일절은 의미 있는 공휴일 입니다. ",
+    "NotSupportedByDesign": "javascript,python,java",
+    "Results": [
+      {
+        "Text": "삼일절",
+        "Type": "date",
+        "Start": 0,
+        "Length": 3
+      }
+    ]
+  },
+  {
+    "Input": "석가탄신일은 부처님 오신 날 입니다.",
+    "NotSupportedByDesign": "javascript,python,java",
+    "Results": [
+      {
+        "Text": "석가탄신일",
+        "Type": "date",
+        "Start": 0,
+        "Length": 5
+      }
+    ]
+  },
+  {
+    "Input": "8월 15일은 광복절 입니다. ",
+    "NotSupportedByDesign": "javascript,python,java",
+    "Results": [
+      {
+        "Text": "광복절",
+        "Type": "date",
+        "Start": 8,
+        "Length": 3
+      }
+    ]
+  },
+  {
+    "Input": "추석에는 송편을 먹습니다. ",
+    "NotSupportedByDesign": "javascript,python,java",
+    "Results": [
+      {
+        "Text": "추석",
+        "Type": "date",
+        "Start": 0,
+        "Length": 2
+      }
+    ]
+  },
+  {
+    "Input": "국조 단군이 최초의 민족국가인 단군 조선을 건국했음을 기리는 날은 개천절입니다. ",
+    "NotSupportedByDesign": "javascript,python,java",
+    "Results": [
+      {
+        "Text": "개천절",
+        "Type": "date",
+        "Start": 37,
+        "Length": 3
+      }
+    ]
+  },
+  {
+    "Input": "한글날 한글을 만든 날 입니다. ",
+    "NotSupportedByDesign": "javascript,python,java",
+    "Results": [
+      {
+        "Text": "한글날",
+        "Type": "date",
+        "Start": 0,
+        "Length": 3
+      }
+    ]
+  }
+]

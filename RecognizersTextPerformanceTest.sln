@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31729.503
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecognizersTextPerformanceTest", "RecognizersTextPerformanceTest\RecognizersTextPerformanceTest.csproj", "{A370EE9F-0A1B-4EDC-8105-E774F7466D0C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A370EE9F-0A1B-4EDC-8105-E774F7466D0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A370EE9F-0A1B-4EDC-8105-E774F7466D0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A370EE9F-0A1B-4EDC-8105-E774F7466D0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A370EE9F-0A1B-4EDC-8105-E774F7466D0C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1C6BF3F4-7195-49C7-BC31-8B9EED5702E0}
+	EndGlobalSection
+EndGlobal
