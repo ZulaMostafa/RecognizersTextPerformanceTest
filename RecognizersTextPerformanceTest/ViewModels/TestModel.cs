@@ -1,8 +1,4 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace RecognizersTextPerformanceTest.ViewModels
+﻿namespace RecognizersTextPerformanceTest.ViewModels
 {
     public class TestModel
     {

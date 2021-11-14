@@ -1,14 +1,9 @@
-﻿using Newtonsoft.Json;
-using RecognizersTextPerformanceTest.Services;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using RecognizersTextPerformanceTest.Interfaces;
+﻿using Microsoft.Recognizers.Text;
+using RecognizersTextPerformanceTest.enums;
 using RecognizersTextPerformanceTest.Models;
 using RecognizersTextPerformanceTest.Services;
-using RecognizersTextPerformanceTest.Helpers;
 using RecognizersTextPerformanceTest.ViewModels;
+using System;
 
 namespace RecognizersTextPerformanceTest
 {
@@ -23,37 +18,25 @@ namespace RecognizersTextPerformanceTest
             var testsReader = new TestsReader<TestModel>(testParser);
 
             // create text reognizers client
-            var languages = new List<string>()
-            {
-                "en-us"
-            };
-            var textRecognizerClient = new TextRecognizersClient(languages);
+            var culture = Culture.English;
+            var recognizer = Recognizers.Choice;
+            var textRecognizerClient = new TextRecognizersClient(culture, recognizer);
 
-            // create measurement models
-            var timeMeasurementModel = new TimeMeasurementModel();
-            var memoryMeasurementModel = new MemoryMeasurementModel();
+            // create performance model
+            var performanceModel = new PerformanceModel();
 
             // load tests
-            var tests = testsReader.LoadTests("Specs");
+            var tests = testsReader.LoadTests($"tests\\{nameof(Culture.English)}.json");
 
-            // run tests
-            foreach (var test in tests)
+            // run all tests
+            performanceModel.Measure(() =>
             {
-                var input = test.Input;
-                timeMeasurementModel.Measure(() => textRecognizerClient.RunTest(input));
-                memoryMeasurementModel.Measure(() => textRecognizerClient.RunTest(input));
-            }
-
-            // get time result
-            var elapsedMilliseconds = (long)timeMeasurementModel.getResult();
-            var elapsedTime = TimeConverter.ConvertMillisecondsToTimeFormat(elapsedMilliseconds);
-
-            // get memory result
-            var kbMemory = (long)memoryMeasurementModel.getResult();
+                foreach (var test in tests)
+                    textRecognizerClient.RunTest(test.Input);
+            });
 
             // print results
-            Console.WriteLine($"Total time: {elapsedTime}");
-            Console.WriteLine($"Total memory: {kbMemory}");
+            Console.WriteLine(performanceModel.GetResults());
         }
     }
 }

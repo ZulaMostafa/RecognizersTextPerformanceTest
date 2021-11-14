@@ -1,15 +1,10 @@
 ﻿using RecognizersTextPerformanceTest.Interfaces;
-using RecognizersTextPerformanceTest.ViewModels;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RecognizersTextPerformanceTest.Services
 {
-    public class TestsReader<T>: IFilesReader<T>
+    public class TestsReader<T> : IFilesReader<T>
     {
         public ITestParser _parser;
 
@@ -17,35 +12,12 @@ namespace RecognizersTextPerformanceTest.Services
         {
             _parser = parser;
         }
-        public List<T> LoadTests(string basePath)
+        public List<T> LoadTests(string path)
         {
-            var tests = new List<T>();
+            var input = File.ReadAllText(path);
+            var testsInFile = _parser.Parse<T>(input);
 
-            CrawlDirectories(basePath, tests);
-
-            return tests;
+            return testsInFile;
         }
-
-        private void CrawlDirectories(string directory, List<T> tests)
-        {
-            foreach (var nestedDirectories in Directory.EnumerateDirectories(directory))
-            {
-                CrawlDirectories(nestedDirectories, tests);
-            }
-
-            ProcessDirectory(directory, tests);
-        }
-
-        private void ProcessDirectory(string directory, List<T> tests)
-        {
-            foreach (var file in Directory.EnumerateFiles(directory))
-            {
-                var textInFile = File.ReadAllText(file);
-                var testsInFile = _parser.Parse<T>(textInFile);
-
-                tests.AddRange(testsInFile);
-            }
-        }
-
     }
 }
