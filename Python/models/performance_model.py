@@ -12,13 +12,13 @@ class performance_model:
         memory_before_execution = psutil.Process(os.getpid()).memory_info().rss
 
         # get total ticks before execution
-        ticks_before_execution = time.clock()
+        ticks_before_execution = time.perf_counter()
 
         # execute function
         action_to_be_done()
 
         # get total ticks after execution
-        ticks_after_execution = time.clock()
+        ticks_after_execution = time.perf_counter()
 
         # get total memory after execution
         memory_after_execution = psutil.Process(os.getpid()).memory_info().rss
@@ -30,7 +30,7 @@ class performance_model:
 
     def get_results(self):
         return \
-        "Total Ticks: " + self.total_ticks + "\n" + \
-        "Total Memory: " + self.total_memory
+        "Total Ticks: " + str(self.total_ticks) + "\n" + \
+        "Total Memory: " + str(self.total_memory)
 
 

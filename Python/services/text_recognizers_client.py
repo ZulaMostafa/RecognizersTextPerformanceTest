@@ -59,5 +59,5 @@ class text_recognizers_client:
         self.__models.append(sequence_recognizer.get_email_model())
 
     def run_test(self, input):
-        for model in self.models:
-            print(model.parse(input))
+        for model in self.__models:
+            model.parse(input)
