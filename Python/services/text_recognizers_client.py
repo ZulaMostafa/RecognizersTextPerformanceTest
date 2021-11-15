@@ -9,20 +9,23 @@ class text_recognizers_client:
     def __init__(self, cultures, recognizers):
         self.models = []
         
+        print(cultures)
+        print(recognizers)
+
         for culture in cultures:
-            if 'ChoiceRecognizer' in recognizers:
+            if 'Choice' in recognizers:
                 self.add_choice_models(culture)
 
-            if 'DateTimeRecognizer' in recognizers:
+            if 'DateTime' in recognizers:
                 self.add_date_time_models(culture)
 
-            if 'NumberRecognizer' in recognizers:
+            if 'Number' in recognizers:
                 self.add_number_recognizers_models(culture)
             
-            if 'NumberWithUnitRecognizer' in recognizers:
+            if 'NumberWithUnit' in recognizers:
                 self.add_number_with_unit_recognizers_models(culture)
 
-            if 'SequenceRecognizer' in recognizers:
+            if 'Sequence' in recognizers:
                 self.add_sequence_models(culture)
         
         
@@ -61,4 +64,4 @@ class text_recognizers_client:
 
     def run_test(self, input):
         for model in self.models:
-            model.parse(input)
+            print(model.parse(input))
