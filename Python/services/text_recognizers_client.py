@@ -35,7 +35,6 @@ class text_recognizers_client:
         self.__models.append(date_time_recognizer.get_datetime_model())
 
     def _add_number_recognizers_models(self, culture):
-        print(culture)
         number_recognizer = NumberRecognizer(culture)
         self.__models.append(number_recognizer.get_number_model())
         self.__models.append(number_recognizer.get_ordinal_model())
