@@ -5,7 +5,7 @@ from recognizers_number import NumberRecognizer
 from recognizers_number_with_unit import NumberWithUnitRecognizer 
 from recognizers_sequence import SequenceRecognizer 
 
-class TextRecognizersClient:
+class text_recognizers_client:
     def __init__(self, cultures, recognizers):
         self.models = []
         
@@ -61,4 +61,4 @@ class TextRecognizersClient:
 
     def run_test(self, input):
         for model in self.models:
-            print(model.parse(input))
+            model.parse(input)

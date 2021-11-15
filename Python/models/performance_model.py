@@ -2,7 +2,7 @@ import time
 import os
 import psutil
 
-class PerformanceModel:
+class performance_model:
     def __init__(self):
         self.total_ticks = 0
         self.total_memory = 0

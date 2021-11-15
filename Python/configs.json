@@ -1,0 +1,12 @@
+{
+  "rootPath": "tests",
+  "cultures": [
+    "English"
+  ],
+  "recognizers": [
+    "Choice",
+    "Number",
+    "NumberWithUnit"
+  ],
+  "operationName": "test"
+}
