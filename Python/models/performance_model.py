@@ -30,7 +30,7 @@ class performance_model:
 
     def get_results(self):
         return \
-        "Total Ticks: " + str(self.total_ticks) + "\n" + \
-        "Total Memory: " + str(self.total_memory)
+        "Total Ticks: " + str(self.total_ticks) + '\n' + \
+        "Total Memory: " + str(self.total_memory) + '\n'
 
 
