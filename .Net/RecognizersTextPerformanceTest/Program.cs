@@ -46,7 +46,7 @@ namespace RecognizersTextPerformanceTest
             // init logging service
             var loggingService = new LoggingService();
 
-            // register loggers [TODO: add types to config giles]
+            // register loggers [TODO: add types to configs file]
             loggingService.RegisterLogger(new ConsoleLogger());
             loggingService.RegisterLogger(new FileLogger());
 
