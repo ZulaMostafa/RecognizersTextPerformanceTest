@@ -10,5 +10,7 @@ namespace RecognizersTextPerformanceTest
     {
         public const string ConfigsFileDirectory = ".";
         public const string ConfigsFileName = "configs.json";
+
+        public const string LogsFileDirectory = "logs";
     }
 }

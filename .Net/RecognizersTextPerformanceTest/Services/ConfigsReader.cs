@@ -19,7 +19,7 @@ namespace RecognizersTextPerformanceTest.Services
                 var configsFile = File.ReadAllText(filePath);
                 return JsonHandler.DeserializeObject<ConfigModel>(configsFile, Constants.ConfigsFileName);
             }
-            // todo: handle exception
+            // TODO: handle exception
             throw new Exception("File not found");
         }
     }
