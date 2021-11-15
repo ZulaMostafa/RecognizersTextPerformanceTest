@@ -1,9 +1,12 @@
 ﻿using Microsoft.Recognizers.Text;
 using RecognizersTextPerformanceTest.enums;
+using RecognizersTextPerformanceTest.Helpers;
 using RecognizersTextPerformanceTest.Models;
 using RecognizersTextPerformanceTest.Services;
 using RecognizersTextPerformanceTest.ViewModels;
 using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace RecognizersTextPerformanceTest
 {
@@ -11,32 +14,30 @@ namespace RecognizersTextPerformanceTest
     {
         static void Main(string[] args)
         {
-            // construct test parser
-            var testParser = new JsonTestParser();
-
-            // consturct tests loader
-            var testsReader = new TestsReader<TestModel>(testParser);
+            // load configs file
+            var configsFile = ConfigsReader.LoadApplicationConfigs();
 
             // create text reognizers client
-            var culture = Culture.English;
-            var recognizer = Recognizers.Choice;
-            var textRecognizerClient = new TextRecognizersClient(culture, recognizer);
+            var textRecognizerClient = new TextRecognizersClient(configsFile.cultures, configsFile.recognizers);
 
             // create performance model
             var performanceModel = new PerformanceModel();
 
             // load tests
-            var tests = testsReader.LoadTests($"tests\\{nameof(Culture.English)}.json");
-
-            // run all tests
+            var tests = new List<TestModel>();
+            foreach (var culture in configsFile.cultures)
+            {
+                var path = Path.Combine(configsFile.RootPath, $"{culture}.json");
+                var text = File.ReadAllText(path);
+                var cultureTests = JsonHandler.DeserializeObject<List<TestModel>>(text);
+                tests.AddRange(cultureTests);
+            }
+            
             performanceModel.Measure(() =>
             {
                 foreach (var test in tests)
                     textRecognizerClient.RunTest(test.Input);
             });
-
-            // print results
-            Console.WriteLine(performanceModel.GetResults());
         }
     }
 }

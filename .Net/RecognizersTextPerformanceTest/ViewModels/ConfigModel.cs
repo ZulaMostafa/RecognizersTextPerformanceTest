@@ -1,5 +1,6 @@
 ﻿using Microsoft.Recognizers.Text;
 using Newtonsoft.Json;
+using RecognizersTextPerformanceTest.enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +15,12 @@ namespace RecognizersTextPerformanceTest.ViewModels
         public string RootPath { get; set; }
         
         [JsonProperty("cultures")]
-        public List<Culture> cultures { get; set; }
+        public List<string> cultures { get; set; }
 
         [JsonProperty("recognizers")]
-        public List<string> recognizers { get; set; }
+        public List<Recognizers> recognizers { get; set; }
+
+        [JsonProperty("operationName")]
+        public string OperationName { get; set; }
     }
 }
