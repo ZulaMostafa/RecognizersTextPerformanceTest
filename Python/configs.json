@@ -4,9 +4,7 @@
     "English"
   ],
   "recognizers": [
-    "Choice",
-    "Number",
-    "NumberWithUnit"
+    "Number"
   ],
   "operationName": "test"
 }

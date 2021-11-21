@@ -10,3 +10,4 @@ logs/
 tests/
 *.pubxml.user
 *.csproj.user
+*.pubxml

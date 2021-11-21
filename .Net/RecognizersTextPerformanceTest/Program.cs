@@ -43,7 +43,7 @@ namespace RecognizersTextPerformanceTest
                     textRecognizerClient.RunTest(test.Input);
             });
 
-            // init logging service
+            // init logging service 
             var loggingService = new LoggingService();
 
             // register loggers [TODO: add types to configs file]

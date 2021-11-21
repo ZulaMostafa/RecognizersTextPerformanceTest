@@ -7,7 +7,7 @@ namespace RecognizersTextPerformanceTest.Models
     public class PerformanceModel : IPerformanceModel
     {
         private long _totalMemory;
-        private long _totalTicks;
+        private double _totalTicks;
 
         public PerformanceModel()
         {
@@ -33,7 +33,7 @@ namespace RecognizersTextPerformanceTest.Models
             var memoryAfterExecution = Process.GetCurrentProcess().WorkingSet64;
 
             // add results
-            _totalTicks = ticksAfterExecution - ticksBeforeExecution;
+            _totalTicks = TimeSpan.FromTicks(ticksAfterExecution - ticksBeforeExecution).TotalSeconds;
             _totalMemory = memoryAfterExecution - memoryBeforeExecution;
         }
 
