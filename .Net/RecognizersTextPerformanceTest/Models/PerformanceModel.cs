@@ -7,12 +7,12 @@ namespace RecognizersTextPerformanceTest.Models
     public class PerformanceModel : IPerformanceModel
     {
         private long _totalMemory;
-        private double _totalTicks;
+        private double _totalSeconds;
 
         public PerformanceModel()
         {
             _totalMemory = 0;
-            _totalTicks = 0;
+            _totalSeconds = 0;
         }
 
         public void Measure(Action actionToBeDone)
@@ -33,16 +33,18 @@ namespace RecognizersTextPerformanceTest.Models
             var memoryAfterExecution = Process.GetCurrentProcess().WorkingSet64;
 
             // add results
-            _totalTicks = TimeSpan.FromTicks(ticksAfterExecution - ticksBeforeExecution).TotalSeconds;
+            _totalSeconds = TimeSpan.FromTicks(ticksAfterExecution - ticksBeforeExecution).TotalSeconds;
             _totalMemory = memoryAfterExecution - memoryBeforeExecution;
         }
 
-        public string GetResults()
+        public long GetMemory()
         {
-            return string.Join(
-                '\n',
-                $"Total ticks: {_totalTicks}",
-                $"Total Memory: {_totalMemory}");
+            return _totalMemory;
+        }
+
+        public double GetTime()
+        {
+            return _totalSeconds;
         }
     }
 }

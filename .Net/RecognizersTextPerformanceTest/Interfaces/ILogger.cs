@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RecognizersTextPerformanceTest.Interfaces
+﻿namespace RecognizersTextPerformanceTest.Interfaces
 {
     public interface ILogger
     {

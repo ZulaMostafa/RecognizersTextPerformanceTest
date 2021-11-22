@@ -6,6 +6,6 @@
         DateTime = 1,
         Number = 2,
         NumberWithUnit = 3,
-        Sequence = 4
+        Sequence = 4,
     }
 }

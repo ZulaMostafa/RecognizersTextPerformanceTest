@@ -6,7 +6,6 @@ using Microsoft.Recognizers.Text.NumberWithUnit;
 using Microsoft.Recognizers.Text.Sequence;
 using RecognizersTextPerformanceTest.enums;
 using RecognizersTextPerformanceTest.Interfaces;
-using System;
 using System.Collections.Generic;
 
 namespace RecognizersTextPerformanceTest.Services
@@ -14,27 +13,27 @@ namespace RecognizersTextPerformanceTest.Services
     public class TextRecognizersClient : ITextRecognizerClient
     {
         private List<IModel> _models;
-        public TextRecognizersClient(List<string> cultures, List<Recognizers> recognizers)
+        public TextRecognizersClient(string culture, Recognizers recognizer)
         {
             _models = new List<IModel>();
 
-            foreach (var culture in cultures)
+            switch (recognizer)
             {
-                if (recognizers.Contains(Recognizers.Choice))
+                case Recognizers.Choice:
                     AddChoiceModels(culture);
-
-                if (recognizers.Contains(Recognizers.DateTime))
+                    break;
+                case Recognizers.DateTime:
                     AddDateTimeModels(culture);
-
-                if (recognizers.Contains(Recognizers.Number))
+                    break;
+                case Recognizers.Number:
                     AddNumberModels(culture);
-
-                if (recognizers.Contains(Recognizers.NumberWithUnit))
+                    break;
+                case Recognizers.NumberWithUnit:
                     AddNumberWithUnitModels(culture);
-
-                if (recognizers.Contains(Recognizers.Sequence))
+                    break;
+                case Recognizers.Sequence:
                     AddSequenceModels(culture);
-
+                    break;
             }
 
         }
@@ -84,7 +83,7 @@ namespace RecognizersTextPerformanceTest.Services
         {
             foreach (var model in _models)
                 model.Parse(test);
-         
+
         }
     }
 }
