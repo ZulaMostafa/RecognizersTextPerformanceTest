@@ -83,7 +83,6 @@ namespace RecognizersTextPerformanceTest.Services
         {
             foreach (var model in _models)
                 model.Parse(test);
-
         }
     }
 }

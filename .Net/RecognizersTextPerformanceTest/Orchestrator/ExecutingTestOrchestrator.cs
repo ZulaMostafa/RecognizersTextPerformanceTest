@@ -11,7 +11,12 @@ namespace RecognizersTextPerformanceTest.Orchestrator
 {
     public class ExecutingTestOrchestrator
     {
-        public PerformanceResults ExcecutePerformanceTests(string culturesOption, string recognizersOption, int iterationCount)
+        public PerformanceResults ExcecutePerformanceTests(string culturesOption,
+            string recognizersOption,
+            int iterationCount,
+            PerformanceModel performanceModel,
+            Dictionary<string, List<string>> cultureTests,
+            Dictionary<string, TextRecognizersClient> recognizerClients)
         {
             // Initalize recognizers and cultures list
             var recognizers = InitalizeRecognizersList(recognizersOption);
@@ -26,9 +31,26 @@ namespace RecognizersTextPerformanceTest.Orchestrator
                 {
                     foreach (var culture in cultures)
                     {
-                        Thread.Sleep(800);
+                        // get test set
+                        var tests = cultureTests[culture];
 
-                        var testResults = ExecuteTest(culture, recognizer);
+                        // get specific recognizer
+                        var key = $"{recognizer}-{culture}";
+                        var recognizerClient = recognizerClients[key];
+
+                        // execute tests
+                        performanceModel.Measure(() =>
+                        {
+                            foreach (var test in tests)
+                                recognizerClient.RunTest(test);
+                        });
+
+                        // get results
+                        var testResults = new PerformanceMetrics()
+                        {
+                            Memory = performanceModel.GetMemory(),
+                            Time = performanceModel.GetTime()
+                        };
 
                         // get specific result dictionary for the current recognizer and iteration
                         var dictionary = performanceResults.GetDictionary(recognizer, iteration - 1);
@@ -61,34 +83,6 @@ namespace RecognizersTextPerformanceTest.Orchestrator
 
             var cultures = new List<string>() { culturesOptions };
             return cultures;
-        }
-
-        private PerformanceMetrics ExecuteTest(string culture, Recognizers recognizer)
-        {
-            // read test file
-            var testInputs = TestsReader.ReadTests("tests", culture);
-
-            // initalize text recognizers client
-            var textRecognizersClient = new TextRecognizersClient(culture, recognizer);
-
-            // initalize performance model
-            var performanceModel = new PerformanceModel();
-
-            // execute test
-            performanceModel.Measure(() =>
-            {
-                foreach (var testInput in testInputs)
-                    textRecognizersClient.RunTest(testInput);
-            });
-
-            // get results
-            var performanceResults = new PerformanceMetrics()
-            {
-                Memory = performanceModel.GetMemory(),
-                Time = performanceModel.GetTime()
-            };
-
-            return performanceResults;
         }
     }
 }

@@ -17,23 +17,29 @@ namespace RecognizersTextPerformanceTest.Models
 
         public void Measure(Action actionToBeDone)
         {
+            // collect garbace
+            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced);
+            GC.WaitForPendingFinalizers();
+            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced);
+
             // measure memory before execution
-            var memoryBeforeExecution = Process.GetCurrentProcess().WorkingSet64;
+            var memoryBeforeExecution = GC.GetTotalMemory(false);
 
             // measure ticks before execution
-            var ticksBeforeExecution = DateTime.Now.Ticks;
+            var stopWatch = Stopwatch.StartNew();
 
             // execute action
             actionToBeDone();
 
-            // measure ticks after execution
-            var ticksAfterExecution = DateTime.Now.Ticks;
+            // calculate current ticks
+            stopWatch.Stop();
+            var ticks = stopWatch.Elapsed.TotalSeconds;
 
             // measure memory after execution
-            var memoryAfterExecution = Process.GetCurrentProcess().WorkingSet64;
+            var memoryAfterExecution = GC.GetTotalMemory(false);
 
             // add results
-            _totalSeconds = TimeSpan.FromTicks(ticksAfterExecution - ticksBeforeExecution).TotalSeconds;
+            _totalSeconds = ticks;
             _totalMemory = memoryAfterExecution - memoryBeforeExecution;
         }
 
