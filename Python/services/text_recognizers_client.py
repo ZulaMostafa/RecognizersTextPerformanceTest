@@ -6,24 +6,23 @@ from recognizers_number_with_unit import NumberWithUnitRecognizer
 from recognizers_sequence import SequenceRecognizer 
 
 class text_recognizers_client:
-    def __init__(self, cultures, recognizers):
+    def __init__(self, culture, recognizer):
         self.__models = []
 
-        for culture in cultures:
-            if 'Choice' in recognizers:
-                self._add_choice_models(culture)
+        if recognizer == 'Choice':
+            self._add_choice_models(culture)
 
-            if 'DateTime' in recognizers:
-                self._add_date_time_models(culture)
+        if recognizer == 'DateTime':
+            self._add_date_time_models(culture)
 
-            if 'Number' in recognizers:
-                self._add_number_recognizers_models(culture)
+        if recognizer == 'Number':
+            self._add_number_recognizers_models(culture)
             
-            if 'NumberWithUnit' in recognizers:
-                self._add_number_with_unit_recognizers_models(culture)
+        if recognizer == 'NumberWithUnit':
+            self._add_number_with_unit_recognizers_models(culture)
 
-            if 'Sequence' in recognizers:
-                self._add_sequence_models(culture)
+        if recognizer == 'sequence':
+            self._add_sequence_models(culture)
         
 
     def _add_choice_models(self, culture):

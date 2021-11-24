@@ -1,43 +1,31 @@
-import json
-import constants
-import os
-import services.configs_reader as configs_reader
 import services.tests_reader as tests_reader
 from models.performance_model import performance_model
 from services.text_recognizers_client import text_recognizers_client
-from services.logging_service import logging_service
-from models.Logger.console_logger import console_logger
-from models.Logger.file_logger import file_logger
-from operator import attrgetter
+import sys
 
-# load configs file
-configs = configs_reader.load_application_configs()
+# get culture and recognizer from args
+culture = sys.argv[1]
+recognizer = sys.argv[2]
+tests_path = sys.argv[3]
 
-# create text recognizers client
-text_recognizers_client = text_recognizers_client(configs["cultures"], configs["recognizers"])
-
-# create performance model
 performance_model = performance_model()
 
-# load tests [TODO: enhance loading tests for python]
-all_Tests = []
-for culture in configs["cultures"]: 
-    path = os.path.join(configs["rootPath"], f'{culture}.json')
-    culture_tests = tests_reader.read_tests(path)
-    all_Tests.extend(culture_tests)
+def run_test():
+    # read tests
+    culture_tests = tests_reader.read_tests(tests_path)
 
-# run performance model
-def runTests():
-    for test in all_Tests:
-        text_recognizers_client.run_test(test)
+    # init recognizer client
+    recognizer_client = text_recognizers_client(culture, recognizer)
 
-performance_model.measure(runTests)
+    #run tests
+    for test in culture_tests:
+        recognizer_client.run_test(test)
 
-# init logging service
-logging_service = logging_service()
+performance_model.measure(run_test)
 
-# register loggers [TODO: add types to configs file]
-logging_service.add_logger(console_logger())
-logging_service.add_logger(file_logger())
+memory = str(performance_model.get_memory())
+time = str(performance_model.get_ticks())
 
-logging_service.log(configs['operationName'], performance_model.get_results())
+print(memory + " " + time)
+
+

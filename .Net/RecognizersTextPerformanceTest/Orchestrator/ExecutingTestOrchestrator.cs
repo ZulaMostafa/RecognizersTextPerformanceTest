@@ -1,10 +1,13 @@
-﻿using RecognizersTextPerformanceTest.enums;
+﻿using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Running;
+using RecognizersTextPerformanceTest.enums;
 using RecognizersTextPerformanceTest.Helpers;
 using RecognizersTextPerformanceTest.Models;
 using RecognizersTextPerformanceTest.Services;
 using RecognizersTextPerformanceTest.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 
 namespace RecognizersTextPerformanceTest.Orchestrator
@@ -13,10 +16,7 @@ namespace RecognizersTextPerformanceTest.Orchestrator
     {
         public PerformanceResults ExcecutePerformanceTests(string culturesOption,
             string recognizersOption,
-            int iterationCount,
-            PerformanceModel performanceModel,
-            Dictionary<string, List<string>> cultureTests,
-            Dictionary<string, TextRecognizersClient> recognizerClients)
+            int iterationCount)
         {
             // Initalize recognizers and cultures list
             var recognizers = InitalizeRecognizersList(recognizersOption);
@@ -29,21 +29,26 @@ namespace RecognizersTextPerformanceTest.Orchestrator
             {
                 for (int iteration = 1; iteration <= iterationCount; iteration++)
                 {
-                    foreach (var culture in cultures)
+                    var randomized = cultures.ToList().OrderBy(x => Guid.NewGuid()).ToList();
+                    foreach (var culture in randomized)
                     {
                         // get test set
-                        var tests = cultureTests[culture];
+                        var tests = TestsReader.ReadTests("tests", culture);
 
                         // get specific recognizer
                         var key = $"{recognizer}-{culture}";
-                        var recognizerClient = recognizerClients[key];
+                        var recognizerClient = new TextRecognizersClient(culture, recognizer);
+
+                        // create performance model
+                        var performanceModel = new PerformanceModel();
 
                         // execute tests
-                        performanceModel.Measure(() =>
+                        /*performanceModel.Measure(() =>
                         {
                             foreach (var test in tests)
                                 recognizerClient.RunTest(test);
-                        });
+                        });*/
+
 
                         // get results
                         var testResults = new PerformanceMetrics()
@@ -65,6 +70,13 @@ namespace RecognizersTextPerformanceTest.Orchestrator
             }
 
             return performanceResults;
+        }
+
+        [Benchmark(Baseline = true)]
+        public void test(TextRecognizersClient c, List<string> tests)
+        {
+            foreach (var test in tests)
+                c.RunTest(test);
         }
 
         private List<Recognizers> InitalizeRecognizersList(string recognizersOptions)

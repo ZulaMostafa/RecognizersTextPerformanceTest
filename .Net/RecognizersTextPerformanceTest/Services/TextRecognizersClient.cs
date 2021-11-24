@@ -37,17 +37,20 @@ namespace RecognizersTextPerformanceTest.Services
             }
 
         }
-
         private void AddChoiceModels(string culture)
         {
             var choiceRecognizr = new ChoiceRecognizer(culture);
             _models.Add(choiceRecognizr.GetBooleanModel());
+
+            choiceRecognizr = null;
         }
 
         private void AddDateTimeModels(string culture)
         {
             var dateTimeRecognizer = new DateTimeRecognizer(culture);
             _models.Add(dateTimeRecognizer.GetDateTimeModel());
+
+            dateTimeRecognizer = null;
         }
 
         private void AddNumberModels(string culture)
@@ -57,6 +60,8 @@ namespace RecognizersTextPerformanceTest.Services
             _models.Add(numberRecognizer.GetNumberRangeModel());
             _models.Add(numberRecognizer.GetOrdinalModel());
             _models.Add(numberRecognizer.GetPercentageModel());
+
+            numberRecognizer = null;
         }
 
         private void AddNumberWithUnitModels(string culture)
@@ -66,6 +71,8 @@ namespace RecognizersTextPerformanceTest.Services
             _models.Add(numberWithUnitRecognizer.GetCurrencyModel());
             _models.Add(numberWithUnitRecognizer.GetDimensionModel());
             _models.Add(numberWithUnitRecognizer.GetTemperatureModel());
+
+            numberWithUnitRecognizer = null;
         }
 
         private void AddSequenceModels(string culture)
@@ -78,6 +85,8 @@ namespace RecognizersTextPerformanceTest.Services
             _models.Add(sequenceRecognizer.GetMentionModel());
             _models.Add(sequenceRecognizer.GetPhoneNumberModel());
             _models.Add(sequenceRecognizer.GetQuotedTextModel());
+
+            sequenceRecognizer = null;
         }
         public void RunTest(string test)
         {
