@@ -1,12 +1,11 @@
-﻿using ScriptRunner.ViewModels;
+﻿using Common.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace ScriptRunner.Helpers
+namespace Common.Helpers
 {
     public class ResultsToCSV
     {
@@ -52,7 +51,7 @@ namespace ScriptRunner.Helpers
             for (int i = 1; i <= _iterationCount; i++)
             {
                 result.Append($"itr {i},");
-                
+
                 foreach (var culture in Constants.cultures)
                 {
                     var currentIterationList = list[i - 1];
@@ -61,7 +60,9 @@ namespace ScriptRunner.Helpers
 
                     var currentMetrics = currentIterationList[culture];
 
-                    result.Append($"{currentMetrics.Memory},");
+                    var memory = Math.Round(currentMetrics.Memory, 3);
+
+                    result.Append($"{memory},");
                 }
 
                 result.AppendLine();
@@ -82,7 +83,8 @@ namespace ScriptRunner.Helpers
                 var max = filteredList.Max();
                 var min = filteredList.Min();
                 var average = (sum - (min + max)) / (_iterationCount - 2);
-                result.Append($"{average},");
+                var roundedAverage = Math.Round(average, 3);
+                result.Append($"{roundedAverage},");
             }
 
             return result.ToString();

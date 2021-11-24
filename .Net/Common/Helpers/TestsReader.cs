@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace RecognizersTextPerformanceTest.Helpers
+namespace Common.Helpers
 {
     public static class TestsReader
     {

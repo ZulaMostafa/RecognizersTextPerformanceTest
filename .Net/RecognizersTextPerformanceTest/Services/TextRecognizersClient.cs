@@ -1,10 +1,10 @@
-﻿using Microsoft.Recognizers.Text;
+﻿using Common.enums;
+using Microsoft.Recognizers.Text;
 using Microsoft.Recognizers.Text.Choice;
 using Microsoft.Recognizers.Text.DateTime;
 using Microsoft.Recognizers.Text.Number;
 using Microsoft.Recognizers.Text.NumberWithUnit;
 using Microsoft.Recognizers.Text.Sequence;
-using RecognizersTextPerformanceTest.enums;
 using RecognizersTextPerformanceTest.Interfaces;
 using System.Collections.Generic;
 

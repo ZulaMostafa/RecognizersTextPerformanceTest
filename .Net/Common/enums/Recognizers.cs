@@ -1,4 +1,4 @@
-﻿namespace RecognizersTextPerformanceTest.enums
+﻿namespace Common.enums
 {
     public enum Recognizers
     {

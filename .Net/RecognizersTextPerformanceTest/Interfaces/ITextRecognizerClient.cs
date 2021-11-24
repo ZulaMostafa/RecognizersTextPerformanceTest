@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace RecognizersTextPerformanceTest.Interfaces
+﻿namespace RecognizersTextPerformanceTest.Interfaces
 {
     public interface ITextRecognizerClient
     {

@@ -1,11 +1,11 @@
-﻿using ScriptRunner.Helpers;
-using ScriptRunner.ViewModels;
+﻿using Common;
+using Common.enums;
+using Common.Helpers;
+using Common.ViewModels;
+using ScriptRunner.Helpers;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ScriptRunner.Orchestrators
 {
@@ -33,17 +33,20 @@ namespace ScriptRunner.Orchestrators
 
                         // get results
                         var splittedOutput = output.Split(' ');
-                        var memory = long.Parse(splittedOutput[0]);
-                        var time = double.Parse(splittedOutput[1]);
+
+                        var memoryInBytes = double.Parse(splittedOutput[0]);
+                        var memoryInKBs = MemoryConverter.BytesToKBs(memoryInBytes);
+
+                        var timeInSeconds = double.Parse(splittedOutput[1]);
 
                         var testResults = new BenchmarksMetrics()
                         {
-                            Memory = memory,
-                            Time = time
+                            Memory = memoryInKBs,
+                            Time = timeInSeconds
                         };
 
                         // get specific result dictionary for the current recognizer and iteration
-                        var dictionary = performanceResults.GetDictionary(recognizer, iteration - 1);
+                        var dictionary = performanceResults.GetDictionary(recognizer.ToString(), iteration - 1);
 
                         // add result to specific culture
                         dictionary.Add(culture, testResults);
@@ -57,12 +60,12 @@ namespace ScriptRunner.Orchestrators
             return performanceResults;
         }
 
-        public static List<string> InitalizeRecognizersList(string recognizersOptions)
+        public static List<Recognizers> InitalizeRecognizersList(string recognizersOptions)
         {
             if (recognizersOptions.ToLower() == "all")
                 return Constants.recognizers;
 
-            var recognizers = new List<string>() { recognizersOptions };
+            var recognizers = new List<Recognizers>() { (Recognizers)Enum.Parse(typeof(Recognizers), recognizersOptions) };
             return recognizers;
         }
 

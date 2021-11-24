@@ -1,7 +1,7 @@
-﻿using RecognizersTextPerformanceTest.enums;
+﻿using Common.enums;
 using System.Collections.Generic;
 
-namespace RecognizersTextPerformanceTest
+namespace Common
 {
     class Constants
     {
