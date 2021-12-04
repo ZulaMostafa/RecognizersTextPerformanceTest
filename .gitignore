@@ -8,6 +8,7 @@ obj/
 bin/
 logs/
 tests/
+results/
 BenchmarkDotNet.Artifacts/
 *.pubxml.user
 *.csproj.user
