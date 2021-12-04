@@ -1,6 +1,7 @@
 ﻿using Common.Helpers;
 using ResultsFinalizer.Helpers;
 using System;
+using System.IO;
 
 namespace ResultsFinalizer
 {
