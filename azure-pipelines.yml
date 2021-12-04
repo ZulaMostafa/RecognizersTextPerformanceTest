@@ -28,5 +28,8 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
     
-- script: dotnet Release
+- script: ls
+  displayName: showFolders
+    
+- script: dotnet run -p BenchmarkTesting.app.csproj -c Release
   displayName: tests
