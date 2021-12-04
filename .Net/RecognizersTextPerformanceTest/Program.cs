@@ -18,8 +18,8 @@ namespace RecognizersTextPerformanceTest
 
             var results = SummaryToResultsConverter.Convert(summary);
 
-            var resultsToCSV = new ResultsToCSV(3);
-            resultsToCSV.SaveAllResultsAsCSV(results, "library-test");
+            var resultsToCSV = new ResultsToCSV(1);
+            resultsToCSV.SaveAllResultsAsCSV(results, "japanese");
         }
     }
 }

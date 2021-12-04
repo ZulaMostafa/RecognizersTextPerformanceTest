@@ -14,6 +14,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\JsonHandler.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\MemoryConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ResultsToCSV.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\SummaryTextToBenchmarkResults.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\TestsReader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\TimeConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ConfigsReader.cs" />

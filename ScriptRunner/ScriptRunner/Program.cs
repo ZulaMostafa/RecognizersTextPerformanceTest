@@ -1,14 +1,17 @@
 ﻿using Common.Helpers;
 using Common.Services;
+using ScriptRunner.Helpers;
 using ScriptRunner.Orchestrators;
+using System;
+using System.Collections.Generic;
 
 namespace ScriptRunner
 {
     class Program
     {
         static void Main(string[] args)
-        {
-            // load configs file
+        { 
+           // load configs file
             var configFile = ConfigsReader.LoadApplicationConfigs();
 
             // get results

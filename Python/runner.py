@@ -10,9 +10,10 @@ tests_path = sys.argv[3]
 
 performance_model = performance_model()
 
+# read tests
+culture_tests = tests_reader.read_tests(tests_path)
+
 def run_test():
-    # read tests
-    culture_tests = tests_reader.read_tests(tests_path)
 
     # init recognizer client
     recognizer_client = text_recognizers_client(culture, recognizer)

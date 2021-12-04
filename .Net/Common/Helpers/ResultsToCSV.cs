@@ -22,7 +22,7 @@ namespace Common.Helpers
             SaveResults(operationName, "Sequence", benchmarkeResults.SeqeuenceRecognizerResults);
             SaveResults(operationName, "DateTime", benchmarkeResults.DateTimeRecognizerResults);
             SaveResults(operationName, "Number", benchmarkeResults.NumberRecognizerResults);
-            SaveResults(operationName, "NumberWithUnit", benchmarkeResults.NumberRecognizerResults);
+            SaveResults(operationName, "NumberWithUnit", benchmarkeResults.NumberWithUnitRecognizerResults);
         }
 
         public void SaveResults(string operationName, string recognizer, List<Dictionary<string, BenchmarksMetrics>> list)
@@ -56,7 +56,10 @@ namespace Common.Helpers
                 {
                     var currentIterationList = list[i - 1];
                     if (!currentIterationList.ContainsKey(culture))
+                    {
+                        result.Append("0,");
                         continue;
+                    }
 
                     var currentMetrics = currentIterationList[culture];
 
@@ -107,7 +110,10 @@ namespace Common.Helpers
                 {
                     var currentIterationList = list[i - 1];
                     if (!currentIterationList.ContainsKey(culture))
+                    {
+                        result.Append("0,");
                         continue;
+                    }
 
                     var currentMetrics = currentIterationList[culture];
 

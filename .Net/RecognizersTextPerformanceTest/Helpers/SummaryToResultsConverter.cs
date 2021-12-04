@@ -10,7 +10,7 @@ namespace RecognizersTextPerformanceTest.Helpers
     {
         public static BenchmarkResults Convert(Summary summary)
         {
-            var performanceResults = new BenchmarkResults(3);
+            var performanceResults = new BenchmarkResults(1);
 
             foreach (var report in summary.Reports)
             {

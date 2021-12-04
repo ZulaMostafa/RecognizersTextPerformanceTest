@@ -56,10 +56,10 @@ namespace RecognizersTextPerformanceTest.Services
         private void AddNumberModels(string culture)
         {
             var numberRecognizer = new NumberRecognizer(culture);
-            _models.Add(numberRecognizer.GetNumberModel());
-            _models.Add(numberRecognizer.GetNumberRangeModel());
+            //_models.Add(numberRecognizer.GetNumberModel());
+            //_models.Add(numberRecognizer.GetNumberRangeModel());
             _models.Add(numberRecognizer.GetOrdinalModel());
-            _models.Add(numberRecognizer.GetPercentageModel());
+            //_models.Add(numberRecognizer.GetPercentageModel());
 
             numberRecognizer = null;
         }
