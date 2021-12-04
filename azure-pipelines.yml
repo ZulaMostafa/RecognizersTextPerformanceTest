@@ -37,5 +37,5 @@ steps:
     
 - script: |
     cd '.Net\RecognizersTextPerformanceTest'
-    dotnet run -p BenchmarkTesting.app.csproj -c Release
+    dotnet run -p -c Release
   displayName: 'tests'
