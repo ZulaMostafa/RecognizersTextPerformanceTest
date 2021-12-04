@@ -28,5 +28,5 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
     
-- script: dotnet -c release
+- script: dotnet Release
   displayName: tests
