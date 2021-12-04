@@ -23,7 +23,7 @@ namespace RecognizersTextPerformanceTest.Services
         public void RunTest()
         {
             var client = new TextRecognizersClient(culture, recognizer);
-            var tests = TestsReader.ReadTests("..\\tests", culture);
+            var tests = TestsReader.ReadTests("..\\testfiles", culture);
 
             foreach (var test in tests)
                 client.RunTest(test);
