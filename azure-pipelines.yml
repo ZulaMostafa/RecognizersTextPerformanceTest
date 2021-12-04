@@ -20,6 +20,10 @@ steps:
 - task: NuGetCommand@2
   inputs:
     restoreSolution: '$(solution)'
+    
+
+- script: dir
+  displayName: showFolders
 
 - task: VSBuild@1
   inputs:
@@ -28,10 +32,10 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
     
-- script: ls
+- script: dir
   displayName: showFolders
     
 - script: |
-    dotnet run -p BenchmarkTesting.app.csproj -c Release
     cd '.Net\RecognizersTextPerformanceTest'
+    dotnet run -p BenchmarkTesting.app.csproj -c Release
   displayName: 'tests'
