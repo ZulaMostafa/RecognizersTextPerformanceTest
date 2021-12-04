@@ -25,7 +25,7 @@ namespace RecognizersTextPerformanceTest.Services
         public void RunTest()
         {
             var client = new TextRecognizersClient(culture, recognizer);
-            var Directory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..\\..\\..\\..\\..\\..\\..\\", "alltests"));
+            var Directory = Path.Combine("D:\\", "a", "1", "s", "alltests");
             var tests = TestsReader.ReadTests(Directory, culture);
 
             foreach (var test in tests)
