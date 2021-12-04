@@ -31,5 +31,7 @@ steps:
 - script: ls
   displayName: showFolders
     
-- script: dotnet run -p BenchmarkTesting.app.csproj -c Release
-  displayName: tests
+- script: |
+    dotnet run -p BenchmarkTesting.app.csproj -c Release
+    cd '.Net\RecognizersTextPerformanceTest'
+  displayName: 'tests'
