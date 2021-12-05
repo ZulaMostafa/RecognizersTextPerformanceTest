@@ -12,10 +12,10 @@ namespace ResultsFinalizer
         {
             var mainDirectory = EnvironmentVariables.GetMainDirectory();
 
-            var currentReleasePath = Path.Combine(mainDirectory, EnvironmentVariables.GetCurrentReleaseDirectory());
+            var currentReleasePath = Path.Combine(mainDirectory, "CurrentRelease");
             var currentReleaseResults = CSVToBenchmarkResults.Load(currentReleasePath);
 
-            var nextReleasePath = Path.Combine(mainDirectory, EnvironmentVariables.GetNextReleaseDirectory());
+            var nextReleasePath = Path.Combine(mainDirectory, "NextRelease");
             var nextReleaseResults = CSVToBenchmarkResults.Load(nextReleasePath);
 
             FinalResultsToCSV.Save(currentReleaseResults, nextReleaseResults, "results");
