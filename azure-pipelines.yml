@@ -24,13 +24,7 @@ steps:
 
 - script: | 
     cd .Net\RecognizersTextPerformanceTest\
-    dotnet remove RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text
-    dotnet remove RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.Number 
-    dotnet remove RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.NumberWithUnit
-    dotnet remove RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.DateTime 
-    dotnet remove RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.Choice 
-    dotnet remove RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.DataTypes.TimexExpression 
-    dotnet remove RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.Sequence 
+    dotnet remove RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text Microsoft.Recognizers.Text.Number Microsoft.Recognizers.Text.NumberWithUnit Microsoft.Recognizers.Text.DateTime Microsoft.Recognizers.Text.Choice Microsoft.Recognizers.Text.DataTypes.TimexExpression Microsoft.Recognizers.Text.Sequence 
     dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text -v 1.8.0
     dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.Number -v 1.8.0
     dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.NumberWithUnit -v 1.8.0
