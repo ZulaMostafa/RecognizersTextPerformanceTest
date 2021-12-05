@@ -26,6 +26,7 @@ steps:
   displayName: showFolders
 
 - script: | 
+    cd .Net\RecognizersTextPerformanceTest\
     dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text -v 1.8.0  
     dotnet nuget locals
   displayName: update packages
