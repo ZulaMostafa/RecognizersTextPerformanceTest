@@ -25,6 +25,12 @@ steps:
 - script: dir
   displayName: showFolders
 
+- script: | 
+    dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text -v 1.8.0  
+    dotnet nuget locals
+  displayName: update packages
+  
+
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
@@ -37,7 +43,5 @@ steps:
     
 - script: |
     cd .Net\RecognizersTextPerformanceTest\
-    nuget Update-Package Microsoft.Recognizers.Text -ProjectName RecognizersTextPerformanceTest -Version 1.8.0
-    dir
     dotnet run -p RecognizersTextPerformanceTest.csproj -c Release
   displayName: 'tests'
