@@ -35,7 +35,7 @@ jobs:
       dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.Choice -v $(TR_CURRENT_RELEASE_VERSION)
       dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.DataTypes.TimexExpression -v $(TR_CURRENT_RELEASE_VERSION)
       dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.Sequence -v $(TR_CURRENT_RELEASE_VERSION)
-    displayName: update packages
+    displayName: Update Packages
     
 
   - task: VSBuild@1
@@ -49,7 +49,7 @@ jobs:
   - script: |
       cd .Net\RecognizersTextPerformanceTest\
       dotnet run -p RecognizersTextPerformanceTest.csproj -c Release
-    displayName: 'Running Tests'
+    displayName: 'Run Tests'
 
   - task: PublishBuildArtifacts@1
     displayName: Publish Artifacts
@@ -77,7 +77,7 @@ jobs:
       dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.Choice -v $(TR_NEXT_RELEASE_VERSION)
       dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.DataTypes.TimexExpression -v $(TR_NEXT_RELEASE_VERSION)
       dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.Sequence -v $(TR_NEXT_RELEASE_VERSION)
-    displayName: update packages
+    displayName: Update Packages
     
 
   - task: VSBuild@1
@@ -91,7 +91,7 @@ jobs:
   - script: |
       cd .Net\RecognizersTextPerformanceTest\
       dotnet run -p RecognizersTextPerformanceTest.csproj -c Release
-    displayName: 'Running Tests'
+    displayName: 'Run Tests'
 
   - task: PublishBuildArtifacts@1
     displayName: Publish Artifacts
