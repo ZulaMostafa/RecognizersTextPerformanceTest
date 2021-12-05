@@ -22,9 +22,6 @@ steps:
     restoreSolution: '$(solution)'
     
 
-- script: dir
-  displayName: showFolders
-
 - script: | 
     cd .Net\RecognizersTextPerformanceTest\
     dotnet remove RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text
@@ -51,10 +48,7 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
     
-- script: dir
-  displayName: showFolders
-    
 - script: |
     cd .Net\RecognizersTextPerformanceTest\
     dotnet run -p RecognizersTextPerformanceTest.csproj -c Release
-  displayName: 'tests'
+  displayName: 'Running Tests'
