@@ -36,7 +36,8 @@ steps:
   displayName: showFolders
     
 - script: |
-    cd '.Net\RecognizersTextPerformanceTest\'
+    cd .Net\RecognizersTextPerformanceTest\
+    Update-Package Microsoft.Recognizers.Text -ProjectName RecognizersTextPerformanceTest -Version 1.8.0
     dir
-    dotnet run -p .Net\RecognizersTextPerformanceTest\RecognizersTextPerformanceTest.csproj -c Release
+    dotnet run -p RecognizersTextPerformanceTest.csproj -c Release
   displayName: 'tests'
