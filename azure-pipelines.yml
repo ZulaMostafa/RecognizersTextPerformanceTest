@@ -25,6 +25,25 @@ steps:
 - script: dir
   displayName: showFolders
 
+- script: | 
+    cd .Net\RecognizersTextPerformanceTest\
+    dotnet remove RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text
+    dotnet remove RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.Number 
+    dotnet remove RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.NumberWithUnit
+    dotnet remove RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.DateTime 
+    dotnet remove RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.Choice 
+    dotnet remove RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.DataTypes.TimexExpression 
+    dotnet remove RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.Sequence 
+    dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text -v 1.8.0
+    dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.Number -v 1.8.0
+    dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.NumberWithUnit -v 1.8.0
+    dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.DateTime  -v 1.8.0
+    dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.Choice -v 1.8.0
+    dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.DataTypes.TimexExpression -v 1.8.0
+    dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.Sequence -v 1.8.0
+  displayName: update packages
+  
+
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
@@ -36,7 +55,6 @@ steps:
   displayName: showFolders
     
 - script: |
-    cd '.Net\RecognizersTextPerformanceTest\'
-    dir
-    dotnet run -p .Net\RecognizersTextPerformanceTest\RecognizersTextPerformanceTest.csproj -c Release
+    cd .Net\RecognizersTextPerformanceTest\
+    dotnet run -p RecognizersTextPerformanceTest.csproj -c Release
   displayName: 'tests'
