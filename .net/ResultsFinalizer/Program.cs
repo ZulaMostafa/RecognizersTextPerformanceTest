@@ -27,7 +27,7 @@ namespace ResultsFinalizer
             Console.WriteLine(FinalResultsToCSV.GetTimeResults(currentReleaseResults, nextReleaseResults));
 
             Console.WriteLine("Memory Results");
-            Console.WriteLine(FinalResultsToCSV.GetMemoryResults(currentBuildResults, nextReleaseResults));
+            Console.WriteLine(FinalResultsToCSV.GetMemoryResults(currentReleaseResults, nextReleaseResults));
         }
     }
 }
