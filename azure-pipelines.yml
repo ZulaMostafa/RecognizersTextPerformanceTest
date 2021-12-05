@@ -27,7 +27,20 @@ steps:
 
 - script: | 
     cd .Net\RecognizersTextPerformanceTest\
-    dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text -v 1.8.0  
+    dotnet remove RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text
+    dotnet remove RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.Number 
+    dotnet remove RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.NumberWithUnit
+    dotnet remove RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.DateTime 
+    dotnet remove RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.Choice 
+    dotnet remove RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.DataTypes.TimexExpression 
+    dotnet remove RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.Sequence 
+    dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text -v 1.8.0
+    dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.Number -v 1.8.0
+    dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.NumberWithUnit -v 1.8.0
+    dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.DateTime  -v 1.8.0
+    dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.Choice -v 1.8.0
+    dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.DataTypes.TimexExpression -v 1.8.0
+    dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.Sequence -v 1.8.0
     dotnet nuget locals
   displayName: update packages
   
