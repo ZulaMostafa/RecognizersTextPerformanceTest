@@ -16,23 +16,35 @@ namespace ResultsFinalizer.Helpers
         {
             Directory.CreateDirectory(operationName);
 
+            var timeResults = GetTimeResults(currentBuildResults, nextBuildResults);
+            var timeFilePath = Path.Combine(operationName, "time.csv");
+            File.WriteAllText(timeFilePath, timeResults.ToString());
+
+            var memoryResults = GetMemoryResults(currentBuildResults, nextBuildResults);
+            var memoryFilePath = Path.Combine(operationName, "memory.csv");
+            File.WriteAllText(memoryFilePath, memoryResults.ToString());
+        }
+
+        public static string GetTimeResults(BenchmarkResults currentBuildResults, BenchmarkResults nextBuildResults)
+        {
             var timeResult = new StringBuilder();
             timeResult.Append(GetRecognizerTimeResults(currentBuildResults.ChoiceRecognizerResults, nextBuildResults.ChoiceRecognizerResults, "Choice"));
             timeResult.Append(GetRecognizerTimeResults(currentBuildResults.SeqeuenceRecognizerResults, nextBuildResults.SeqeuenceRecognizerResults, "Sequence"));
             timeResult.Append(GetRecognizerTimeResults(currentBuildResults.DateTimeRecognizerResults, nextBuildResults.DateTimeRecognizerResults, "DateTime"));
             timeResult.Append(GetRecognizerTimeResults(currentBuildResults.NumberRecognizerResults, nextBuildResults.NumberRecognizerResults, "Number"));
             timeResult.Append(GetRecognizerTimeResults(currentBuildResults.NumberWithUnitRecognizerResults, nextBuildResults.NumberWithUnitRecognizerResults, "NumberWithUnit"));
-            var timeFilePath = Path.Combine(operationName, "time.csv");
-            File.WriteAllText(timeFilePath, timeResult.ToString());
+            return timeResult.ToString();
+        }
 
+        public static string GetMemoryResults(BenchmarkResults currentBuildResults, BenchmarkResults nextBuildResults)
+        {
             var memoryResult = new StringBuilder();
             memoryResult.Append(GetRecognizerMemoryResults(currentBuildResults.ChoiceRecognizerResults, nextBuildResults.ChoiceRecognizerResults, "Choice"));
             memoryResult.Append(GetRecognizerMemoryResults(currentBuildResults.SeqeuenceRecognizerResults, nextBuildResults.SeqeuenceRecognizerResults, "Sequence"));
             memoryResult.Append(GetRecognizerMemoryResults(currentBuildResults.DateTimeRecognizerResults, nextBuildResults.DateTimeRecognizerResults, "DateTime"));
             memoryResult.Append(GetRecognizerMemoryResults(currentBuildResults.NumberRecognizerResults, nextBuildResults.NumberRecognizerResults, "Number"));
             memoryResult.Append(GetRecognizerMemoryResults(currentBuildResults.NumberWithUnitRecognizerResults, nextBuildResults.NumberWithUnitRecognizerResults, "NumberWithUnit"));
-            var memoryFilePath = Path.Combine(operationName, "memory.csv");
-            File.WriteAllText(memoryFilePath, memoryResult.ToString());
+            return memoryResult.ToString();
         }
 
         private static string GetRecognizerTimeResults(List<Dictionary<string, BenchmarksMetrics>> currentRecognizerResults, List<Dictionary<string, BenchmarksMetrics>> upcomingRecognizerResults, string recognizer)
