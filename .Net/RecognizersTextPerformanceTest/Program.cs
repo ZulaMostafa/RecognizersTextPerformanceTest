@@ -18,7 +18,7 @@ namespace RecognizersTextPerformanceTest
             var results = SummaryToResultsConverter.Convert(summary);
 
             var resultsToCSV = new ResultsToCSV(1);
-            var path = Path.Combine(Constants.ResultsDirectory, EnvironmentVariables.GetOperationName());
+            var path = Path.Combine(EnvironmentVariables.GetMainDirectory(), Constants.ResultsDirectory, EnvironmentVariables.GetOperationName());
             resultsToCSV.SaveAllResultsAsCSV(results, path);
         }
     }

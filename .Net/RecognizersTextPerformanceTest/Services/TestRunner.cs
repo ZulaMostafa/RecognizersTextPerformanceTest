@@ -1,4 +1,5 @@
 ﻿using BenchmarkDotNet.Attributes;
+using Common;
 using Common.enums;
 using Common.Helpers;
 using Common.Services;
@@ -30,7 +31,7 @@ namespace RecognizersTextPerformanceTest.Services
         public void RunTest()
         {
             var client = new TextRecognizersClient(culture, recognizer);
-            var Directory = Path.Combine("C:\\", "testfiles");
+            var Directory = Path.Combine(EnvironmentVariables.GetMainDirectory(), Constants.TestsDirectory, "testfiles");
             var tests = TestsReader.ReadTests(Directory, culture);
 
             foreach (var test in tests)
