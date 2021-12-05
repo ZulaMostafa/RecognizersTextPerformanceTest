@@ -41,7 +41,6 @@ steps:
     dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.Choice -v 1.8.0
     dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.DataTypes.TimexExpression -v 1.8.0
     dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.Sequence -v 1.8.0
-    dotnet nuget locals
   displayName: update packages
   
 
