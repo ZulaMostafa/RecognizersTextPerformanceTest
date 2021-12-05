@@ -91,7 +91,7 @@ jobs:
   - task: PublishBuildArtifacts@1
     inputs:
       PathtoPublish: '$(System.DefaultWorkingDirectory)/results/$(TR_OPERATION_NAME)'
-      ArtifactName: 'NEXT_RELEASE'
+      ArtifactName: 'NextRelease'
       publishLocation: 'Container'
     
 - job: FinalizeResults
@@ -114,3 +114,17 @@ jobs:
       downloadType: 'single'
       artifactName: 'NextRelease'
       downloadPath: '$(System.DefaultWorkingDirectory)'
+      
+  - task: VSBuild@1
+    displayName: BuildProject
+    inputs:
+      solution: '$(solution)'
+      msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /Restore /p:DeployIisAppPath="Default Web Site"'
+      platform: '$(buildPlatform)'
+      configuration: '$(buildConfiguration)'
+      
+  - script: |
+      cd .Net\ResultsFinalizer\
+      dotnet run -p ResultsFinalizer.csproj
+    displayName: 'Loading Results'
+
