@@ -55,7 +55,7 @@ jobs:
       ArtifactName: 'CurrentRelease'
       publishLocation: 'Container'
       
-- job: NextReleaseReleaseTests
+- job: NextReleaseTests
   steps:
   - script: | 
       cd .Net\RecognizersTextPerformanceTest\
