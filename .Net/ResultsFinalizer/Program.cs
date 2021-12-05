@@ -22,6 +22,12 @@ namespace ResultsFinalizer
 
             FinalResultsToCSV.Save(currentReleaseResults, nextReleaseResults, "results");
             Console.Write("Results Saved");
+
+            Console.WriteLine("Time results:");
+            Console.WriteLine(FinalResultsToCSV.GetTimeResults(currentReleaseResults, nextReleaseResults));
+
+            Console.WriteLine("Memory Results");
+            Console.WriteLine(FinalResultsToCSV.GetMemoryResults(currentReleaseResults, nextReleaseResults));
         }
     }
 }
