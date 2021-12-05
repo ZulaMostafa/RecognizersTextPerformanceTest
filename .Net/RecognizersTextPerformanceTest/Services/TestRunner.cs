@@ -23,12 +23,14 @@ namespace RecognizersTextPerformanceTest.Services
         [ParamsSource(nameof(Recognizers))]
         public Recognizers recognizer { get; set; }
 
+        [Params(1)]
+        public int iteration;
 
         [Benchmark(Baseline = true)]
         public void RunTest()
         {
             var client = new TextRecognizersClient(culture, recognizer);
-            var Directory = Path.Combine("D:\\", "a", "1", "s", "testfiles");
+            var Directory = Path.Combine("C:\\", "testfiles");
             var tests = TestsReader.ReadTests(Directory, culture);
 
             foreach (var test in tests)
