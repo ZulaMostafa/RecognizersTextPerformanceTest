@@ -15,43 +15,47 @@ variables:
   buildConfiguration: 'Release'
   TR_MAIN_DIRECTORY: $(System.DefaultWorkingDirectory)
 
-jobs:
-- job: Initalizing
-  steps:
-  - task: NuGetToolInstaller@1
+stages:
 
-  - task: NuGetCommand@2
-    inputs:
-      restoreSolution: '$(solution)'
+  - stage: Initalizing
+    jobs:
+    - job: NuGetToolInstaller
+      steps: 
+      - task: NuGetToolInstaller@1
+
+  - stage: PreviousRelease
+    dependsOn: Initalizing
+    jobs:
+    - job: CurrentReleaseTests
+      steps:
+      - script: | 
+          cd .Net\RecognizersTextPerformanceTest\
+          dotnet remove RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text
+          dotnet remove RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.Number 
+          dotnet remove RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.NumberWithUnit
+          dotnet remove RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.DateTime 
+          dotnet remove RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.Choice 
+          dotnet remove RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.DataTypes.TimexExpression 
+          dotnet remove RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.Sequence 
+          dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text -v 1.8.0
+          dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.Number -v 1.8.0
+          dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.NumberWithUnit -v 1.8.0
+          dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.DateTime  -v 1.8.0
+          dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.Choice -v 1.8.0
+          dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.DataTypes.TimexExpression -v 1.8.0
+          dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.Sequence -v 1.8.0
+        displayName: update packages
+        
+      - task: VSBuild@1
+        inputs:
+          solution: '$(solution)'
+          msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /Restore /p:DeployIisAppPath="Default Web Site"'
+          platform: '$(buildPlatform)'
+          configuration: '$(buildConfiguration)'
+          
+      - script: |
+          cd .Net\RecognizersTextPerformanceTest\
+          dotnet run -p RecognizersTextPerformanceTest.csproj -c Release
+        displayName: 'Running Tests'
+
     
-- job: CurrentReleaseTests
-  steps:
-  - script: | 
-      cd .Net\RecognizersTextPerformanceTest\
-      dotnet remove RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text
-      dotnet remove RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.Number 
-      dotnet remove RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.NumberWithUnit
-      dotnet remove RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.DateTime 
-      dotnet remove RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.Choice 
-      dotnet remove RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.DataTypes.TimexExpression 
-      dotnet remove RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.Sequence 
-      dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text -v 1.8.0
-      dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.Number -v 1.8.0
-      dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.NumberWithUnit -v 1.8.0
-      dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.DateTime  -v 1.8.0
-      dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.Choice -v 1.8.0
-      dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.DataTypes.TimexExpression -v 1.8.0
-      dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.Sequence -v 1.8.0
-    displayName: update packages
-    
-  - task: VSBuild@1
-    inputs:
-      solution: '$(solution)'
-      msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /Restore /p:DeployIisAppPath="Default Web Site"'
-      platform: '$(buildPlatform)'
-      configuration: '$(buildConfiguration)'
-      
-  - script: |
-      cd .Net\RecognizersTextPerformanceTest\
-      dotnet run -p RecognizersTextPerformanceTest.csproj -c Release
-    displayName: 'Running Tests'
