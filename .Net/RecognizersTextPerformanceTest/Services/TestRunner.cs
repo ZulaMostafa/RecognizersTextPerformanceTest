@@ -31,7 +31,7 @@ namespace RecognizersTextPerformanceTest.Services
         public void RunTest()
         {
             var client = new TextRecognizersClient(culture, recognizer);
-            var Directory = Path.Combine(EnvironmentVariables.GetMainDirectory(), Constants.TestsDirectory, "testfiles");
+            var Directory = Path.Combine(EnvironmentVariables.GetMainDirectory(), Constants.TestsDirectory);
             var tests = TestsReader.ReadTests(Directory, culture);
 
             foreach (var test in tests)
