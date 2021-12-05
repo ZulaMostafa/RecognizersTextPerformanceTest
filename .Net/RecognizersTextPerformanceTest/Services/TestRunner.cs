@@ -1,23 +1,26 @@
 ﻿using BenchmarkDotNet.Attributes;
 using Common.enums;
 using Common.Helpers;
+using Common.Services;
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace RecognizersTextPerformanceTest.Services
 {
     [MemoryDiagnoser]
     public class TestRunner
-    {
-        [Params(1)]
-        public int iteration { get; set; }
+    {   
+        public IEnumerable<string> Cultures 
+            => ConfigurationInitalizer.InitalizeCulturesList(EnvironmentVariables.GetCulturesConfiguration());
 
-        [Params("English")]
+        public IEnumerable<Recognizers> Recognizers
+            => ConfigurationInitalizer.InitalizeRecognizersList(EnvironmentVariables.GetRecognizersConfiguration());
 
+        [ParamsSource(nameof(Cultures))]
         public string culture { get; set; }
 
-        [Params(Recognizers.Choice)]
-
+        [ParamsSource(nameof(Recognizers))]
         public Recognizers recognizer { get; set; }
 
 

@@ -11,6 +11,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Constants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)enums\Recognizers.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\ConfigurationInitalizer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\JsonHandler.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\MemoryConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ResultsToCSV.cs" />
@@ -18,6 +19,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\TestsReader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\TimeConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ConfigsReader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\EnvironmentVariables.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BenchmarkResults.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BenchmarksMetrics.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ConfigModel.cs" />

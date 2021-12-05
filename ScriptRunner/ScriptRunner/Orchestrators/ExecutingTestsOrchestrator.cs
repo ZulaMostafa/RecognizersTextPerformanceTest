@@ -17,8 +17,8 @@ namespace ScriptRunner.Orchestrators
             int innterIterationCount = 51;
 
             // Initalize recognizers and cultures list
-            var recognizers = InitalizeRecognizersList(configs.RecognizersOption);
-            var cultures = InitalizeCulturesList(configs.CulturesOption);
+            var recognizers = ConfigurationInitalizer.InitalizeRecognizersList(configs.RecognizersOption);
+            var cultures = ConfigurationInitalizer.InitalizeCulturesList(configs.CulturesOption);
 
             // Initalize results carrier
             var performanceResults = new BenchmarkResults(configs.IterationCount);
@@ -74,24 +74,6 @@ namespace ScriptRunner.Orchestrators
             }
 
             return performanceResults;
-        }
-
-        public static List<Recognizers> InitalizeRecognizersList(string recognizersOptions)
-        {
-            if (recognizersOptions.ToLower() == "all")
-                return Constants.recognizers;
-
-            var recognizers = new List<Recognizers>() { (Recognizers)Enum.Parse(typeof(Recognizers), recognizersOptions) };
-            return recognizers;
-        }
-
-        public static List<string> InitalizeCulturesList(string culturesOptions)
-        {
-            if (culturesOptions.ToLower() == "all")
-                return Constants.cultures;
-
-            var cultures = new List<string>() { culturesOptions };
-            return cultures;
         }
     }
 }
