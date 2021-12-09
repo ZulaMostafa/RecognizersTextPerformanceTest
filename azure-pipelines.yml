@@ -21,13 +21,7 @@ jobs:
   steps:
   - script: | 
       cd .Net\RecognizersTextPerformanceTest\
-      dotnet remove RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text
-      dotnet remove RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.Number 
-      dotnet remove RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.NumberWithUnit
-      dotnet remove RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.DateTime 
-      dotnet remove RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.Choice 
-      dotnet remove RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.DataTypes.TimexExpression 
-      dotnet remove RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.Sequence 
+      dotnet remove RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.*
       dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text -v $(TR_CURRENT_RELEASE_VERSION)
       dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.Number -v $(TR_CURRENT_RELEASE_VERSION)
       dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.NumberWithUnit -v $(TR_CURRENT_RELEASE_VERSION)
