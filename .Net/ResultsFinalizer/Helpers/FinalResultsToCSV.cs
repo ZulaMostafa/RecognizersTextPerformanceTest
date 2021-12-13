@@ -16,7 +16,7 @@ namespace ResultsFinalizer.Helpers
         public static void Save(BenchmarkResults currentBuildResults, BenchmarkResults nextBuildResults, string operationName)
         {
             var mainDirectory = EnvironmentVariables.GetMainDirectory();
-            var workingDirectory = Path.Combine(mainDirectory, operationName);
+            var workingDirectory = Path.Combine(mainDirectory, operationName, "FinalResults");
 
             if (!Directory.Exists(workingDirectory))
                 Directory.CreateDirectory(workingDirectory);
