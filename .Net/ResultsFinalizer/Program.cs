@@ -20,7 +20,7 @@ namespace ResultsFinalizer
             var nextReleaseResults = CSVToBenchmarkResults.Load(nextReleasePath);
             Console.WriteLine("next release tests loaded");
 
-            FinalResultsToCSV.Save(currentReleaseResults, nextReleaseResults, "results");
+            FinalResultsToCSV.Save(currentReleaseResults, nextReleaseResults);
             Console.Write("Results Saved");
 
             Console.WriteLine("Time results:");

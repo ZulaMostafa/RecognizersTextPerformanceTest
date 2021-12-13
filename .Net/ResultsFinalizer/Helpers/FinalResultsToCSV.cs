@@ -13,8 +13,9 @@ namespace ResultsFinalizer.Helpers
 {
     public static class FinalResultsToCSV
     {
-        public static void Save(BenchmarkResults currentBuildResults, BenchmarkResults nextBuildResults, string operationName)
+        public static void Save(BenchmarkResults currentBuildResults, BenchmarkResults nextBuildResults)
         {
+            var operationName = EnvironmentVariables.GetOperationName();
             var mainDirectory = EnvironmentVariables.GetMainDirectory();
             var workingDirectory = Path.Combine(mainDirectory, operationName, "FinalResults");
 
