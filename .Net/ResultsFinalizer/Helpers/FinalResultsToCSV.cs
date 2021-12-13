@@ -7,6 +7,7 @@ using Common.ViewModels;
 using Common.enums;
 using Common;
 using System.IO;
+using Common.Services;
 
 namespace ResultsFinalizer.Helpers
 {
@@ -14,14 +15,18 @@ namespace ResultsFinalizer.Helpers
     {
         public static void Save(BenchmarkResults currentBuildResults, BenchmarkResults nextBuildResults, string operationName)
         {
-            Directory.CreateDirectory(operationName);
+            var mainDirectory = EnvironmentVariables.GetMainDirectory();
+            var workingDirectory = Path.Combine(mainDirectory, operationName);
+
+            if (!Directory.Exists(workingDirectory))
+                Directory.CreateDirectory(workingDirectory);
 
             var timeResults = GetTimeResults(currentBuildResults, nextBuildResults);
-            var timeFilePath = Path.Combine(operationName, "time.csv");
+            var timeFilePath = Path.Combine(workingDirectory, "time.csv");
             File.WriteAllText(timeFilePath, timeResults.ToString());
 
             var memoryResults = GetMemoryResults(currentBuildResults, nextBuildResults);
-            var memoryFilePath = Path.Combine(operationName, "memory.csv");
+            var memoryFilePath = Path.Combine(workingDirectory, "memory.csv");
             File.WriteAllText(memoryFilePath, memoryResults.ToString());
         }
 
