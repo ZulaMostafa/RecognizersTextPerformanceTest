@@ -17,6 +17,7 @@ variables:
 
 jobs:
 - job: CurrentReleaseTests
+  displayName: Current Release Tests
   steps:
   - script: | 
       cd .Net\RecognizersTextPerformanceTest\
@@ -34,10 +35,11 @@ jobs:
       dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.Choice -v $(TR_CURRENT_RELEASE_VERSION)
       dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.DataTypes.TimexExpression -v $(TR_CURRENT_RELEASE_VERSION)
       dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.Sequence -v $(TR_CURRENT_RELEASE_VERSION)
-    displayName: update packages
+    displayName: Update Packages
     
 
   - task: VSBuild@1
+    displayName: Build Project
     inputs:
       solution: '$(solution)'
       msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /Restore /p:DeployIisAppPath="Default Web Site"'
@@ -47,15 +49,17 @@ jobs:
   - script: |
       cd .Net\RecognizersTextPerformanceTest\
       dotnet run -p RecognizersTextPerformanceTest.csproj -c Release
-    displayName: 'Running Tests'
+    displayName: 'Run Tests'
 
   - task: PublishBuildArtifacts@1
+    displayName: Publish Artifacts
     inputs:
       PathtoPublish: '$(System.DefaultWorkingDirectory)/results/$(TR_OPERATION_NAME)'
       ArtifactName: 'CurrentRelease'
       publishLocation: 'Container'
       
 - job: NextReleaseTests
+  displayName: Next Release Tests
   steps:
   - script: | 
       cd .Net\RecognizersTextPerformanceTest\
@@ -73,10 +77,11 @@ jobs:
       dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.Choice -v $(TR_NEXT_RELEASE_VERSION)
       dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.DataTypes.TimexExpression -v $(TR_NEXT_RELEASE_VERSION)
       dotnet add RecognizersTextPerformanceTest.csproj package Microsoft.Recognizers.Text.Sequence -v $(TR_NEXT_RELEASE_VERSION)
-    displayName: update packages
+    displayName: Update Packages
     
 
   - task: VSBuild@1
+    displayName: Build Project
     inputs:
       solution: '$(solution)'
       msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /Restore /p:DeployIisAppPath="Default Web Site"'
@@ -86,21 +91,23 @@ jobs:
   - script: |
       cd .Net\RecognizersTextPerformanceTest\
       dotnet run -p RecognizersTextPerformanceTest.csproj -c Release
-    displayName: 'Running Tests'
+    displayName: 'Run Tests'
 
   - task: PublishBuildArtifacts@1
+    displayName: Publish Artifacts
     inputs:
       PathtoPublish: '$(System.DefaultWorkingDirectory)/results/$(TR_OPERATION_NAME)'
       ArtifactName: 'NextRelease'
       publishLocation: 'Container'
     
 - job: FinalizeResults
+  displayName: Finalize Results
   dependsOn:
   - CurrentReleaseTests
   - NextReleaseTests
   steps:
   - task: DownloadBuildArtifacts@0
-    displayName: DownloadCurrentReleaseArtifacts
+    displayName: Download Current Release Artifacts
     inputs:
       buildType: 'current'
       downloadType: 'single'
@@ -108,7 +115,7 @@ jobs:
       downloadPath: '$(System.DefaultWorkingDirectory)'
 
   - task: DownloadBuildArtifacts@0
-    displayName: DownloadCurrentReleaseArtifacts
+    displayName: Download Next Release Artifacts
     inputs:
       buildType: 'current'
       downloadType: 'single'
@@ -116,7 +123,7 @@ jobs:
       downloadPath: '$(System.DefaultWorkingDirectory)'
       
   - task: VSBuild@1
-    displayName: BuildProject
+    displayName: Build Project
     inputs:
       solution: '$(solution)'
       msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /Restore /p:DeployIisAppPath="Default Web Site"'
@@ -126,5 +133,5 @@ jobs:
   - script: |
       cd .Net\ResultsFinalizer\
       dotnet run -p ResultsFinalizer.csproj
-    displayName: 'Loading Results'
+    displayName: 'Finalize and Print Results'
 
