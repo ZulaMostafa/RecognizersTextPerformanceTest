@@ -1,4 +1,5 @@
-﻿using BenchmarkDotNet.Running;
+﻿using BenchmarkDotNet.Configs;
+using BenchmarkDotNet.Running;
 using Common;
 using Common.Helpers;
 using Common.Services;
@@ -13,7 +14,9 @@ namespace RecognizersTextPerformanceTest
     {
         static void Main(string[] args)
         {
-            var summary = BenchmarkRunner.Run<TestRunner>();
+            var config = ManualConfig.Create(DefaultConfig.Instance);
+            config.SummaryStyle = config.SummaryStyle.WithTimeUnit(Perfolizer.Horology.TimeUnit.Second).WithSizeUnit(BenchmarkDotNet.Columns.SizeUnit.MB);
+            var summary = BenchmarkRunner.Run<TestRunner>(config);
 
             var results = SummaryToResultsConverter.Convert(summary);
 
