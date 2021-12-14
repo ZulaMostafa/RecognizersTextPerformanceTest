@@ -20,19 +20,16 @@ namespace RecognizersTextPerformanceTest.Helpers
                 var recognizer = report.BenchmarkCase.Parameters["recognizer"].ToString();
                 var enumRecognizer = (Recognizers)Enum.Parse(typeof(Recognizers), recognizer);
 
-                // get memory in KBs
-                var memoryInBytes = report.Metrics["Allocated Memory"].Value;
-                var memoryInKBs = MemoryConverter.BytesToKBs(memoryInBytes);
+                // get memory in MBs
+                var memoryInMBs = report.Metrics["Allocated Memory"].Value;
 
                 // get time in seconds
-                var timeInNano = report.ResultStatistics.Mean;
-                var timeInSeconds = TimeConverter.NanoToSeconds(timeInNano);
-
+                var timeInSeconds = report.ResultStatistics.Mean;
 
                 // get results
                 var performanceMetrics = new BenchmarksMetrics()
                 {
-                    Memory = memoryInKBs,
+                    Memory = memoryInMBs,
                     Time = timeInSeconds
                 };
 

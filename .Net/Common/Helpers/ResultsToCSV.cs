@@ -82,11 +82,7 @@ namespace Common.Helpers
                 }
 
                 var filteredList = list.Select(x => x[culture].Memory);
-                var sum = filteredList.Sum();
-                var max = filteredList.Max();
-                var min = filteredList.Min();
-                var average = (sum - (min + max)) / (_iterationCount - 2);
-                var roundedAverage = Math.Round(average, 3);
+                var roundedAverage = Math.Round(filteredList.Average(), 3);
                 result.Append($"{roundedAverage},");
             }
 
@@ -136,11 +132,7 @@ namespace Common.Helpers
                 }
 
                 var filteredList = list.Select(x => x[culture].Time);
-                var sum = filteredList.Sum();
-                var max = filteredList.Max();
-                var min = filteredList.Min();
-                var average = (sum - (min + max)) / (_iterationCount - 2);
-                var roundedAverage = Math.Round(average, 3);
+                var roundedAverage = Math.Round(filteredList.Average(), 3);
                 result.Append($"{roundedAverage},");
             }
 
