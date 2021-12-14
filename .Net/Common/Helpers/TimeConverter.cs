@@ -8,7 +8,7 @@ namespace Common.Helpers
     {
         public static double NanoToSeconds(double nano)
         {
-            return nano / 1000000;
+            return nano / 1000000000;
         }
     }
 }

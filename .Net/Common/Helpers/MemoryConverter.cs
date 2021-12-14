@@ -6,9 +6,9 @@ namespace Common.Helpers
 {
     public static class MemoryConverter
     {
-        public static double BytesToKBs(double bytes)
+        public static double BytesToMBs(double bytes)
         {
-            return bytes / 1024;
+            return bytes / (1024 * 1024);
         }
     }
 }

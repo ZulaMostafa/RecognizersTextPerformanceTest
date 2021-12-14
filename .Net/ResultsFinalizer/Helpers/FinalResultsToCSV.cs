@@ -91,7 +91,7 @@ namespace ResultsFinalizer.Helpers
             foreach (var culture in Constants.cultures)
             {
                 if (benchmarkType == "time")
-                    result.Append($"{upcomingRecognizerResults[0][culture].Time - currentRecognizerResults[0][culture].Time},");
+                    result.Append($"{Math.Round(upcomingRecognizerResults[0][culture].Time - currentRecognizerResults[0][culture].Time, 3)},");
                 else if (benchmarkType == "memory")
                     result.Append($"{upcomingRecognizerResults[0][culture].Memory - currentRecognizerResults[0][culture].Memory},");
             }

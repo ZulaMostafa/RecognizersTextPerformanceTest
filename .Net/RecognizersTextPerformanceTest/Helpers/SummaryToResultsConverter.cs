@@ -12,6 +12,8 @@ namespace RecognizersTextPerformanceTest.Helpers
         {
             var performanceResults = new BenchmarkResults(1);
 
+            Console.WriteLine("SSSSSSSSSSSS: " + summary.Style.TimeUnit);
+
             foreach (var report in summary.Reports)
             {
                 // get pararmeters
@@ -21,10 +23,12 @@ namespace RecognizersTextPerformanceTest.Helpers
                 var enumRecognizer = (Recognizers)Enum.Parse(typeof(Recognizers), recognizer);
 
                 // get memory in MBs
-                var memoryInMBs = report.Metrics["Allocated Memory"].Value;
+                var memoryInBytes = report.Metrics["Allocated Memory"].Value;
+                var memoryInMBs = MemoryConverter.BytesToMBs(memoryInBytes);
 
                 // get time in seconds
-                var timeInSeconds = report.ResultStatistics.Mean;
+                var timeInNano = report.ResultStatistics.Mean;
+                var timeInSeconds = TimeConverter.NanoToSeconds(timeInNano);
 
                 // get results
                 var performanceMetrics = new BenchmarksMetrics()
