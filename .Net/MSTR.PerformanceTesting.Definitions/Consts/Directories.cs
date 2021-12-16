@@ -9,5 +9,6 @@ namespace MSTR.PerformanceTesting.Definitions.Consts
     public static class Directories
     {
         public const string TestsDirectory = "testfiles";
+        public const string resultsDirectory = "results";
     }
 }

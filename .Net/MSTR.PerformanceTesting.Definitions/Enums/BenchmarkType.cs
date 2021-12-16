@@ -8,7 +8,7 @@ namespace MSTR.PerformanceTesting.Definitions.Enums
 {
     public enum BenchmarkType
     {
-        Memory,
-        Time
+        Memory = 0,
+        Time = 1
     }
 }

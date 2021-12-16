@@ -28,15 +28,12 @@ namespace MSTR.PerformanceTesting.Core.Converters
         {
             var reportBenchmarkResults = new List<BenchmarkResult>();
 
-            // get result base
-            var benchmarkResultBase = CreateBenchmarkResultBase(report);
-
             // add memory resullt
-            var memoryResult = GetMemoryResult(report, benchmarkResultBase);
+            var memoryResult = GetMemoryResult(report);
             reportBenchmarkResults.Add(memoryResult);
 
             // add time result
-            var timeResult = GetTimeResult(report, benchmarkResultBase);
+            var timeResult = GetTimeResult(report);
             reportBenchmarkResults.Add(timeResult);
 
             return reportBenchmarkResults;
@@ -60,18 +57,21 @@ namespace MSTR.PerformanceTesting.Core.Converters
             };
         }
 
-        private static BenchmarkResult GetMemoryResult(BenchmarkReport report, BenchmarkResult benchmarkResult)
+        private static BenchmarkResult GetMemoryResult(BenchmarkReport report)
         {
+            var benchmarkResult = CreateBenchmarkResultBase(report);
             benchmarkResult.Type = BenchmarkType.Memory;
             benchmarkResult.Value = report.Metrics["Allocated Memory"].Value;
             return benchmarkResult;
         }
 
-        private static BenchmarkResult GetTimeResult(BenchmarkReport report, BenchmarkResult benchmarkResult)
+        private static BenchmarkResult GetTimeResult(BenchmarkReport report)
         {
+            var benchmarkResult = CreateBenchmarkResultBase(report);
             benchmarkResult.Type = BenchmarkType.Time;
             benchmarkResult.Value = report.ResultStatistics.Mean;
             return benchmarkResult;
         }
+
     } 
 }
