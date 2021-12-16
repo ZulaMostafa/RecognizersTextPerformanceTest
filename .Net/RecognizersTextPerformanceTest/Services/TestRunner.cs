@@ -30,6 +30,8 @@ namespace RecognizersTextPerformanceTest.Services
         [Benchmark(Baseline = true)]
         public void RunTest()
         {
+            Console.WriteLine($"Executing tests for {culture} {recognizer}");
+
             var client = new TextRecognizersClient(culture, recognizer);
             var Directory = Path.Combine(EnvironmentVariables.GetMainDirectory(), Constants.TestsDirectory);
             var tests = TestsReader.ReadTests(Directory, culture);

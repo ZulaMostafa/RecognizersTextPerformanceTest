@@ -1,16 +1,20 @@
-﻿using Common.enums;
-using Microsoft.Recognizers.Text;
+﻿using Microsoft.Recognizers.Text;
 using Microsoft.Recognizers.Text.Choice;
 using Microsoft.Recognizers.Text.DateTime;
 using Microsoft.Recognizers.Text.Number;
 using Microsoft.Recognizers.Text.NumberWithUnit;
 using Microsoft.Recognizers.Text.Sequence;
-using RecognizersTextPerformanceTest.Interfaces;
+using MSTR.PerformanceTesting.Definitions.Enums;
+using MSTR.PerformanceTesting.Definitions.Interfaces;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace RecognizersTextPerformanceTest.Services
+namespace MSTR.PerformanceTesting.Core.Services
 {
-    public class TextRecognizersClient : ITextRecognizerClient
+    public class TextRecognizersClient : ITextRecognizersClient
     {
         private List<IModel> _models;
         public TextRecognizersClient(string culture, Recognizers recognizer)

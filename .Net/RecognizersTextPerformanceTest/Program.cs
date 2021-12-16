@@ -8,6 +8,7 @@ using RecognizersTextPerformanceTest.Helpers;
 using RecognizersTextPerformanceTest.Services;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace RecognizersTextPerformanceTest
 {
@@ -15,10 +16,17 @@ namespace RecognizersTextPerformanceTest
     {
         static void Main(string[] args)
         {
-            var config = ManualConfig.Create(DefaultConfig.Instance)
+            var config = new ManualConfig()
                 .WithSummaryStyle(SummaryStyle.Default
                 .WithTimeUnit(Perfolizer.Horology.TimeUnit.Second)
                 .WithSizeUnit(BenchmarkDotNet.Columns.SizeUnit.MB));
+            config.AddColumnProvider(DefaultConfig.Instance.GetColumnProviders().ToArray());
+            config.AddExporter(DefaultConfig.Instance.GetExporters().ToArray());
+            config.AddAnalyser(DefaultConfig.Instance.GetAnalysers().ToArray());
+            config.AddJob(DefaultConfig.Instance.GetJobs().ToArray());
+            config.AddValidator(DefaultConfig.Instance.GetValidators().ToArray());
+            config.AddLogger(DefaultConfig.Instance.GetLoggers().ToArray());
+            config.UnionRule = ConfigUnionRule.AlwaysUseGlobal; // Overriding the default
             var summary = BenchmarkRunner.Run<TestRunner>(config);
 
             var results = SummaryToResultsConverter.Convert(summary);
