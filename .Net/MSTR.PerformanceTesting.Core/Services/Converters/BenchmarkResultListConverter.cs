@@ -8,11 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MSTR.PerformanceTesting.Core.Converters
+namespace MSTR.PerformanceTesting.Core.Services.Converters
 {
-    public static class SingleReleaseTableConverter
+    public class BenchmarkResultListConverter
     {
-        public static List<List<string>> From(List<BenchmarkResult> results, Recognizers recognizer, BenchmarkType benchmarkType)
+        public List<List<string>> GetTable(List<BenchmarkResult> results, Recognizers recognizer, BenchmarkType benchmarkType)
         {
             var result = new List<List<string>>();
 
@@ -25,50 +25,34 @@ namespace MSTR.PerformanceTesting.Core.Converters
             result.Add(columns);
 
             // get recognizer results
-            var recognizerResults = results.Where(r => r.Recognizer == recognizer).ToList();
+            var recognizerResults = results.Where(r => r.Recognizer == recognizer && r.Type == benchmarkType).ToList();
 
             // iterate over results
             for (int i = 1; i <= iterationsCount; i++)
             {
-                var row = CreateRow(recognizerResults, testedCultures, benchmarkType, i);
+                var row = CreateRow(recognizerResults, testedCultures, i);
                 result.Add(row);
             }
 
             return result;
         }
 
-        private static List<string> InitilaizeColumns(List<string> testedCultures)
+        private List<string> InitilaizeColumns(List<string> testedCultures)
         {
             var columns = new List<string>() { "" };
             columns.AddRange(testedCultures);
             return columns;
         }
 
-        private static List<string> CreateRow(List<BenchmarkResult> recognizerResults, List<string> testedCultures, BenchmarkType benchmarkType, int iteration)
+        private List<string> CreateRow(List<BenchmarkResult> recognizerResults, List<string> testedCultures, int iteration)
         {
             var row = new List<string>() { iteration.ToString() };
             foreach (var culture in testedCultures)
-            { 
-                var currentResult = recognizerResults.Where(r => r.Iteration == iteration && r.Culture == culture && r.Type == benchmarkType).First();
+            {
+                var currentResult = recognizerResults.Where(r => r.Iteration == iteration && r.Culture == culture).First();
                 row.Add(currentResult.Value.ToString());
             }
             return row;
         }
-
-        public static List<BenchmarkResult> To(List<List<string>> table)
-        {
-            var benchmarkResults = new List<BenchmarkResult>();
-
-            for (int i = 1; i < table.Count; i++)
-            {
-                var currentRow = table[i];
-                for (int j = 1; j < table[i].Count; j++)
-                {
-
-                }
-            }
-
-            return benchmarkResults;
-        }
-    }
+    } 
 }

@@ -16,7 +16,10 @@ namespace MSTR.PerformanceTesting.Core.Helpers
             var path = Path.Combine(rootPath, $"{culture}.json");
 
             // read json text
-            var jsonText = File.ReadAllText(path);
+            var jsonData = File.ReadAllBytes(path);
+
+            // convert to text
+            var jsonText = Encoding.UTF8.GetString(jsonData);
 
             // parse into json array
             var jArray = JArray.Parse(jsonText);

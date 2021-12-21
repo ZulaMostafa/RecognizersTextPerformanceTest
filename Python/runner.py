@@ -27,6 +27,7 @@ performance_model.measure(run_test)
 memory = str(performance_model.get_memory())
 time = str(performance_model.get_ticks())
 
-print(memory + " " + time)
+#print(memory + " " + time)
+print('done')
 
 

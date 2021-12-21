@@ -1,8 +1,10 @@
 ﻿using MSTR.PerformanceTesting.Core.Converters;
 using MSTR.PerformanceTesting.Core.Helpers;
+using MSTR.PerformanceTesting.Core.Services.Converters;
 using MSTR.PerformanceTesting.Definitions.Consts;
 using MSTR.PerformanceTesting.Definitions.Enums;
 using MSTR.PerformanceTesting.Definitions.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,9 +14,15 @@ using System.Threading.Tasks;
 
 namespace MSTR.PerformanceTesting.Core.Services
 {
-    public static class ResultsLogger
+    public class ResultsLogger
     {
-        public static void LogResults(List<BenchmarkResult> results)
+        public void LogResults(List<BenchmarkResult> results)
+        {
+            LogCSV(results);
+            LogJson(results);
+        }
+
+        public void LogCSV(List<BenchmarkResult> results)
         {
             // initalize recognizers list
             var recognizers = ConfigurationInitalizer.InitalizeRecognizersList(Environment.GetEnvironmentVariable(EnvironmentVariablesStrings.RecognizersConfiguration));
@@ -32,12 +40,22 @@ namespace MSTR.PerformanceTesting.Core.Services
                     var path = Path.Combine(mainDirectory, Directories.resultsDirectory, operationName, recognizer.ToString());
 
                     // get table results
-                    var tableResults = SingleReleaseTableConverter.From(results, recognizer, benchmarkType);
+                    var benchmarkResultsListConverter = new BenchmarkResultListConverter();
+                    var tableResults = benchmarkResultsListConverter.GetTable(results, recognizer, benchmarkType);
 
                     // write results into file
                     CSVWriter.Write(tableResults, path, $"{recognizer.ToString()}-{benchmarkType.ToString()}");
                 }
             }
+        }
+
+        public void LogJson(List<BenchmarkResult> results)
+        {
+            string jsonString = JsonConvert.SerializeObject(results);
+            var mainDirectory = Environment.GetEnvironmentVariable(EnvironmentVariablesStrings.MainDirectory);
+            var operationName = Environment.GetEnvironmentVariable(EnvironmentVariablesStrings.OperationName);
+            string path = Path.Combine(mainDirectory, Directories.resultsDirectory, operationName, "results.json");
+            File.WriteAllText(path, jsonString);
         }
     }
 }
