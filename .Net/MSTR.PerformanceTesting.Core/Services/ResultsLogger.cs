@@ -1,5 +1,4 @@
-﻿using MSTR.PerformanceTesting.Core.Converters;
-using MSTR.PerformanceTesting.Core.Helpers;
+﻿using MSTR.PerformanceTesting.Core.Helpers;
 using MSTR.PerformanceTesting.Core.Services.Converters;
 using MSTR.PerformanceTesting.Definitions.Consts;
 using MSTR.PerformanceTesting.Definitions.Enums;

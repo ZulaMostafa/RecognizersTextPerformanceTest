@@ -12,19 +12,18 @@ namespace MSTR.PerformanceTesting.Core.Services
 {
     public class ResultsFinalizer
     {
-        private List<string> InitilaizeColumns(List<string> testedCultures)
-        {
-            var columns = new List<string>() { "" };
-            columns.AddRange(testedCultures);
-            return columns;
-        }
-
         public List<List<string>> GetFinalResults(List<BenchmarkResult> previousReleaseResults, List<BenchmarkResult> nextReleaseResults, Recognizers recognizer, BenchmarkType benchmarkType)
         {
+            var table = new List<List<string>>();
+
             // get configurations
             var testedCultures = ConfigurationInitalizer.InitalizeCulturesList(Environment.GetEnvironmentVariable(EnvironmentVariablesStrings.CulturesConfiguration));
 
-            // filter results
+            // Initialize columns
+            var columns = InitilaizeColumns(testedCultures);
+            table.Add(columns);
+
+            // filter results based on requested recognizer and benchmark type
             previousReleaseResults = previousReleaseResults.Where(results => results.Recognizer == recognizer && results.Type == benchmarkType).ToList();
             nextReleaseResults = nextReleaseResults.Where(results => results.Recognizer == recognizer && results.Type == benchmarkType).ToList();
 
@@ -32,22 +31,25 @@ namespace MSTR.PerformanceTesting.Core.Services
             var previousAverageResults = GetAverageResults(previousReleaseResults, testedCultures);
             var nextAverageResults = GetAverageResults(nextReleaseResults, testedCultures);
 
-
             // create rows
             var previousReleaseRow = GetReleaseRow("Previous Release", testedCultures, previousAverageResults);
             var nextReleaseRow = GetReleaseRow("Next Release", testedCultures, nextAverageResults);
             var differenceRow = GetDifferenceRow("Difference", testedCultures, previousAverageResults, nextAverageResults);
-            var percentageRow = GetPercentageRow("Difference", testedCultures, previousAverageResults, nextAverageResults);
+            var percentageRow = GetPercentageRow("Percentage", testedCultures, previousAverageResults, nextAverageResults);
 
             // add rows
-            var table = new List<List<string>>();
-            table.Add(testedCultures);
             table.Add(previousReleaseRow);
             table.Add(nextReleaseRow);
             table.Add(differenceRow);
             table.Add(percentageRow);
 
             return table;
+        }
+        private List<string> InitilaizeColumns(List<string> testedCultures)
+        {
+            var columns = new List<string>() { "" };
+            columns.AddRange(testedCultures);
+            return columns;
         }
 
         public List<BenchmarkResult> GetAverageResults(List<BenchmarkResult> benchmarkResults, List<string> testedCultures)

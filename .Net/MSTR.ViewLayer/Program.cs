@@ -1,8 +1,8 @@
 ﻿using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Reports;
 using BenchmarkDotNet.Running;
-using MSTR.PerformanceTesting.Core.Converters;
 using MSTR.PerformanceTesting.Core.Helpers;
+using MSTR.PerformanceTesting.Core.Orchestrators;
 using MSTR.PerformanceTesting.Core.Runners;
 using MSTR.PerformanceTesting.Core.Services;
 using MSTR.PerformanceTesting.Core.Services.Converters;
@@ -35,7 +35,7 @@ namespace MSTR.ViewLayer
 
             ResultsLogger.LogResults(results);*/
 
-            var config = ManualConfig.Create(DefaultConfig.Instance)
+            /*var config = ManualConfig.Create(DefaultConfig.Instance)
                  .WithSummaryStyle(SummaryStyle.Default
                  .WithTimeUnit(Perfolizer.Horology.TimeUnit.Second)
                  .WithSizeUnit(BenchmarkDotNet.Columns.SizeUnit.MB));
@@ -48,8 +48,14 @@ namespace MSTR.ViewLayer
                 Console.WriteLine(x.Culture + " " + x.Iteration + " " + x.Recognizer + " " + x.Type.ToString());
 
             var logger = new ResultsLogger();
-            logger.LogResults(results);
+            logger.LogResults(results);*/
 
+            var orchestrator = new ResultsFinalizerOrchestrator();
+            var mainDirectory = Environment.GetEnvironmentVariable(EnvironmentVariablesStrings.MainDirectory);
+            var operationName = Environment.GetEnvironmentVariable(EnvironmentVariablesStrings.OperationName);
+            string path1 = Path.Combine(mainDirectory, Directories.resultsDirectory, operationName, "a.json");
+            string path2 = Path.Combine(mainDirectory, Directories.resultsDirectory, operationName, "b.json");
+            orchestrator.Finalize(path1, path2);
         }
     }
 }
