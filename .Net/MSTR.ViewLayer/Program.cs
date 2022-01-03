@@ -57,8 +57,41 @@ namespace MSTR.ViewLayer
             string path2 = Path.Combine(mainDirectory, Directories.resultsDirectory, operationName, "b.json");
             orchestrator.Finalize(path1, path2);*/
 
-            for (int i = 0; i < args.Length; i++)
-                Console.WriteLine(args[i]);
+            string type = args[0];
+            
+            switch (type)
+            {
+                case "test":
+                    var config = ManualConfig.Create(DefaultConfig.Instance)
+                 .WithSummaryStyle(SummaryStyle.Default
+                 .WithTimeUnit(Perfolizer.Horology.TimeUnit.Second)
+                 .WithSizeUnit(BenchmarkDotNet.Columns.SizeUnit.MB));
+
+                    var summary = BenchmarkRunner.Run<dotNetRunner>(config);
+
+                    var converter = new BenchmarkDotNetSummaryConverter();
+                    var results = converter.GetBenchmarkListResults(summary);
+
+                    var logger = new ResultsLogger();
+                    logger.LogResults(results);
+                    break;
+                case "finalize":
+                    var finalizingOrchestrator = new ResultsFinalizerOrchestrator();
+
+                    var mainDirectory = Environment.GetEnvironmentVariable(EnvironmentVariablesStrings.MainDirectory);
+
+                    var previousReleaseFolder = args[1];
+                    var nextReleaseFolder = args[2];
+
+                    string previousReleaseJsonFilePath = Path.Combine(mainDirectory, Directories.resultsDirectory, previousReleaseFolder, "results.json");
+                    string nextReleaseJsonFilePath = Path.Combine(mainDirectory, Directories.resultsDirectory, nextReleaseFolder, "results.json");
+                    
+                    finalizingOrchestrator.Finalize(previousReleaseJsonFilePath, nextReleaseJsonFilePath);
+                    break;
+                default:
+                    Console.WriteLine("Wrong input");
+                    break;
+            }
         }
     }
 }
