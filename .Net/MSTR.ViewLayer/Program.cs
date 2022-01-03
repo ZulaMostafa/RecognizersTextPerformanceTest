@@ -83,8 +83,8 @@ namespace MSTR.ViewLayer
                     var previousReleaseFolder = args[1];
                     var nextReleaseFolder = args[2];
 
-                    string previousReleaseJsonFilePath = Path.Combine(mainDirectory, Directories.resultsDirectory, previousReleaseFolder, "results.json");
-                    string nextReleaseJsonFilePath = Path.Combine(mainDirectory, Directories.resultsDirectory, nextReleaseFolder, "results.json");
+                    string previousReleaseJsonFilePath = Path.Combine(mainDirectory, previousReleaseFolder, "results.json");
+                    string nextReleaseJsonFilePath = Path.Combine(mainDirectory, nextReleaseFolder, "results.json");
                     
                     finalizingOrchestrator.Finalize(previousReleaseJsonFilePath, nextReleaseJsonFilePath);
                     break;
