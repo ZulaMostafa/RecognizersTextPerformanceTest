@@ -86,7 +86,7 @@ namespace MSTR.PerformanceTesting.Core.Services
                 var culturePreviousResult = averagePreviousReleaseResults.Where(result => result.Culture == culture).First();
                 var previousAverage = culturePreviousResult.Value;
 
-                var cultureNextResult = averagePreviousReleaseResults.Where(result => result.Culture == culture).First();
+                var cultureNextResult = averageNextReleaseResults.Where(result => result.Culture == culture).First();
                 var NextAverage = cultureNextResult.Value;
 
                 var differnce = NextAverage - previousAverage;
@@ -103,7 +103,7 @@ namespace MSTR.PerformanceTesting.Core.Services
                 var culturePreviousResult = averagePreviousReleaseResults.Where(result => result.Culture == culture).First();
                 var previousAverage = culturePreviousResult.Value;
 
-                var cultureNextResult = averagePreviousReleaseResults.Where(result => result.Culture == culture).First();
+                var cultureNextResult = averageNextReleaseResults.Where(result => result.Culture == culture).First();
                 var NextAverage = cultureNextResult.Value;
 
                 var differnce = NextAverage - previousAverage;
