@@ -50,12 +50,15 @@ namespace MSTR.ViewLayer
             var logger = new ResultsLogger();
             logger.LogResults(results);*/
 
-            var orchestrator = new ResultsFinalizerOrchestrator();
+            /*var orchestrator = new ResultsFinalizerOrchestrator();
             var mainDirectory = Environment.GetEnvironmentVariable(EnvironmentVariablesStrings.MainDirectory);
             var operationName = Environment.GetEnvironmentVariable(EnvironmentVariablesStrings.OperationName);
             string path1 = Path.Combine(mainDirectory, Directories.resultsDirectory, operationName, "a.json");
             string path2 = Path.Combine(mainDirectory, Directories.resultsDirectory, operationName, "b.json");
-            orchestrator.Finalize(path1, path2);
+            orchestrator.Finalize(path1, path2);*/
+
+            for (int i = 0; i < args.Length; i++)
+                Console.WriteLine(args[i]);
         }
     }
 }
