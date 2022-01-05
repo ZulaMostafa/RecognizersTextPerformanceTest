@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BenchmarkDotNet" Version="0.13.1" />
+    <PackageReference Include="Cake.Powershell" Version="1.0.1" />
+    <PackageReference Include="pythonnet" Version="3.0.0-preview2021-12-03" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MSTR.PerformanceTesting.Core\MSTR.PerformanceTesting.Core.csproj" />
+    <ProjectReference Include="..\MSTR.PerformanceTesting.Definitions\MSTR.PerformanceTesting.Definitions.csproj" />
+  </ItemGroup>
+
+</Project>

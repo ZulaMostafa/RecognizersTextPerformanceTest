@@ -8,6 +8,7 @@ using RecognizersTextPerformanceTest.Helpers;
 using RecognizersTextPerformanceTest.Services;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace RecognizersTextPerformanceTest
 {
@@ -15,7 +16,7 @@ namespace RecognizersTextPerformanceTest
     {
         static void Main(string[] args)
         {
-            var config = ManualConfig.Create(DefaultConfig.Instance)
+            var config = new ManualConfig()
                 .WithSummaryStyle(SummaryStyle.Default
                 .WithTimeUnit(Perfolizer.Horology.TimeUnit.Second)
                 .WithSizeUnit(BenchmarkDotNet.Columns.SizeUnit.MB));
