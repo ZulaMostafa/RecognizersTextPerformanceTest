@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 namespace MSTR.PerformanceTesting.Core.Runners
 {
     [MemoryDiagnoser]
+    [SimpleJob(launchCount: 3, warmupCount: 5, targetCount: 15)]
     public class dotNetRunner
     {
         public IEnumerable<string> Cultures
