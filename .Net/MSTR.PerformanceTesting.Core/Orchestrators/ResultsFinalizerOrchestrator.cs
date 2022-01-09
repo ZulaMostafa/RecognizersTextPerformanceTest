@@ -40,6 +40,8 @@ namespace MSTR.PerformanceTesting.Core.Orchestrators
 
             foreach (var recognizer in recognizers)
             {
+                Console.WriteLine($"Finalizing {recognizer.ToString()} results");
+
                 foreach (var benchmarkType in benchmarkTypes)
                 {
                     var results = resultsFinalizer.GetFinalResults(previousReleaseResults, nextReleaseResults, recognizer, benchmarkType, false);

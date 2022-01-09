@@ -120,6 +120,7 @@ namespace MSTR.PerformanceTesting.Core.Services
                 var NextAverage = cultureNextResult.Value;
 
                 var differnce = NextAverage - previousAverage;
+                differnce = Math.Round(differnce, 3);
                 row.Add(differnce.ToString());
             }
             return row;
@@ -139,6 +140,7 @@ namespace MSTR.PerformanceTesting.Core.Services
                 var differnce = NextAverage - previousAverage;
 
                 var percentage = (differnce / previousAverage) * 100f;
+                percentage = Math.Round(percentage, 3);
                 row.Add(percentage.ToString());
             }
             return row;
