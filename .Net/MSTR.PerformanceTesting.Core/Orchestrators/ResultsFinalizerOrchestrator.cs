@@ -33,7 +33,6 @@ namespace MSTR.PerformanceTesting.Core.Orchestrators
 
             // create results finalizer
             var resultsFinalizer = new ResultsFinalizer();
-            var resultsF = new ResultsFinalizerZ();
 
             // get directories
             var mainDirectory = Environment.GetEnvironmentVariable(EnvironmentVariablesStrings.MainDirectory);
@@ -43,11 +42,11 @@ namespace MSTR.PerformanceTesting.Core.Orchestrators
             {
                 foreach (var benchmarkType in benchmarkTypes)
                 {
-                    var results = resultsFinalizer.GetFinalResults(previousReleaseResults, nextReleaseResults, recognizer, benchmarkType);
-                    var resultsv = resultsF.GetFinalResults(previousReleaseResults, nextReleaseResults, recognizer, benchmarkType);
+                    var results = resultsFinalizer.GetFinalResults(previousReleaseResults, nextReleaseResults, recognizer, benchmarkType, false);
+                    var resultsPerTest = resultsFinalizer.GetFinalResults(previousReleaseResults, nextReleaseResults, recognizer, benchmarkType, true);
                     var path = Path.Combine(mainDirectory, Directories.resultsDirectory, operationName, recognizer.ToString());
                     CSVWriter.Write(results, path, $"{benchmarkType.ToString()}-{recognizer.ToString()}");
-                    CSVWriter.Write(resultsv, path, $"{benchmarkType.ToString()}-{recognizer.ToString()}-PerTest");
+                    CSVWriter.Write(resultsPerTest, path, $"{benchmarkType.ToString()}-{recognizer.ToString()}-PerTest");
                 }
             }
         }
