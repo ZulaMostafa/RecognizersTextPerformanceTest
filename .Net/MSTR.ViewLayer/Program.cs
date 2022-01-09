@@ -22,41 +22,6 @@ namespace MSTR.ViewLayer
     {
         public static void Main(string[] args)
         {
-            /*var config = ManualConfig.Create(DefaultConfig.Instance)
-                .WithSummaryStyle(SummaryStyle.Default
-                .WithTimeUnit(Perfolizer.Horology.TimeUnit.Second)
-                .WithSizeUnit(BenchmarkDotNet.Columns.SizeUnit.MB));
-            var summary = BenchmarkRunner.Run<dotNetRunner>(config);
-
-            var results = BenchmarkResultConverter.From(summary);
-
-            foreach (var x in results)
-                Console.WriteLine(x.Culture + " " + x.Iteration + " " + x.Recognizer + " " + x.Type.ToString());
-
-            ResultsLogger.LogResults(results);*/
-
-            /*var config = ManualConfig.Create(DefaultConfig.Instance)
-                 .WithSummaryStyle(SummaryStyle.Default
-                 .WithTimeUnit(Perfolizer.Horology.TimeUnit.Second)
-                 .WithSizeUnit(BenchmarkDotNet.Columns.SizeUnit.MB));
-            var summary = BenchmarkRunner.Run<PythonRunner>(config);
-
-            var converter = new BenchmarkDotNetSummaryConverter();
-            var results = converter.GetBenchmarkListResults(summary);
-
-            foreach (var x in results)
-                Console.WriteLine(x.Culture + " " + x.Iteration + " " + x.Recognizer + " " + x.Type.ToString());
-
-            var logger = new ResultsLogger();
-            logger.LogResults(results);*/
-
-            /*var orchestrator = new ResultsFinalizerOrchestrator();
-            var mainDirectory = Environment.GetEnvironmentVariable(EnvironmentVariablesStrings.MainDirectory);
-            var operationName = Environment.GetEnvironmentVariable(EnvironmentVariablesStrings.OperationName);
-            string path1 = Path.Combine(mainDirectory, Directories.resultsDirectory, operationName, "a.json");
-            string path2 = Path.Combine(mainDirectory, Directories.resultsDirectory, operationName, "b.json");
-            orchestrator.Finalize(path1, path2);*/
-
             string type = args[0];
             
             switch (type)
